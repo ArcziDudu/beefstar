@@ -1,13 +1,15 @@
-package com.beefstar.beefstar.entity;
+package com.beefstar.beefstar.infrastructure.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Role {
     @Id
     private String roleName;

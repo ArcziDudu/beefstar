@@ -1,10 +1,8 @@
 package com.beefstar.beefstar.dao;
 
-import com.beefstar.beefstar.entity.Role;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import com.beefstar.beefstar.domain.RoleDTO;
+import com.beefstar.beefstar.infrastructure.entity.Role;
 
-@Repository
-public interface RoleDao extends CrudRepository<Role, String> {
-
+public interface RoleDao {
+    Role save(RoleDTO role);
 }
