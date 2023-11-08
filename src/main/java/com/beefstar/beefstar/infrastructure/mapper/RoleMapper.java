@@ -8,4 +8,5 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RoleMapper {
     Role mapFromDto(RoleDTO role);
+    RoleDTO mapFromEntity(Role role);
 }

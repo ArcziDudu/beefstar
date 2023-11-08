@@ -1,9 +1,11 @@
 package com.beefstar.beefstar.infrastructure.entity;
 
 
-import jakarta.persistence.*;
+
 import lombok.*;
 
+import javax.persistence.*;
+import javax.persistence.Id;
 import java.util.Set;
 
 @Entity
@@ -12,7 +14,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class NewUser {
+public class UserInfo {
     @Id
     private String userName;
     private String userFirstName;

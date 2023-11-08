@@ -8,6 +8,9 @@ import com.beefstar.beefstar.infrastructure.mapper.RoleMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 @AllArgsConstructor
 public class RoleJpaImpl implements RoleDao {
@@ -16,5 +19,11 @@ public class RoleJpaImpl implements RoleDao {
     @Override
     public Role save(RoleDTO role) {
         return roleJpaRepository.save(roleMapper.mapFromDto(role));
+    }
+
+    @Override
+    public Optional<RoleDTO> findById(String user) {
+     return roleJpaRepository.findById(user).map(roleMapper::mapFromEntity);
+
     }
 }
