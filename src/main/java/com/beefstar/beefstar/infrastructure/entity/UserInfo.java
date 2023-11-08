@@ -1,16 +1,20 @@
-package com.beefstar.beefstar.entity;
+package com.beefstar.beefstar.infrastructure.entity;
 
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
+import lombok.*;
+
+import javax.persistence.*;
+import javax.persistence.Id;
 import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-public class NewUser {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserInfo {
     @Id
     private String userName;
     private String userFirstName;
