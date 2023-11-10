@@ -2,11 +2,21 @@
   <span>
     Beefstar
   </span>
+
   <span class="space-buttons"></span>
   <button *ngIf="! isLoggedIn()" routerLink="/login" mat-raised-button color="primary">Login</button>
 
   <button *ngIf="isLoggedIn()" (click)="logout()" mat-raised-button color="warn">Logout</button>
 </mat-toolbar>
+
+<div class="container">
+  <mat-toolbar color="primary" *ngIf="isLoggedIn()">
+    <div class="container">
+      <button mat-raised-button color="primary" routerLink="/">Home</button>
+      <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="/addNewProduct">Add new product</button>
+    </div>
+  </mat-toolbar>
+</div>
 
 
 <!-- <div class="container">

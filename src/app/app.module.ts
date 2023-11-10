@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
+import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import {MatInputModule} from '@angular/material/input';
     UserComponent,
     LoginComponent,
     HeaderComponent,
-    FobiddenComponent
+    FobiddenComponent,
+    AddNewProductComponent
   ],
   imports: [
     BrowserModule,
