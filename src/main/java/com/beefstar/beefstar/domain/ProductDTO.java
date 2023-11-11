@@ -1,12 +1,17 @@
 package com.beefstar.beefstar.domain;
 
-import lombok.Builder;
+import com.beefstar.beefstar.infrastructure.entity.ImageModel;
+import lombok.*;
 
 import java.math.BigDecimal;
-@Builder
+import java.util.Set;
+
+
+@With
 public record ProductDTO(Integer productId,
                          String productName,
                          String productDescription,
                          BigDecimal productDiscountedPrice,
-                         BigDecimal productActualPrice) {
+                         BigDecimal productActualPrice,
+                         Set<ImageModel> productImages) {
 }

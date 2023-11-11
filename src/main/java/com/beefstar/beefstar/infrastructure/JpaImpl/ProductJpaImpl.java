@@ -5,9 +5,10 @@ import com.beefstar.beefstar.domain.ProductDTO;
 import com.beefstar.beefstar.infrastructure.entity.Product;
 import com.beefstar.beefstar.infrastructure.jpaRepository.ProductJpaRepository;
 import com.beefstar.beefstar.infrastructure.mapper.ProductMapper;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 
@@ -17,8 +18,15 @@ public class ProductJpaImpl implements ProductDao {
 
     @Autowired
     private ProductMapper productMapper;
+
     @Override
     public Product save(ProductDTO product) {
         return productJpaRepository.save(productMapper.mapFromDto(product));
+    }
+
+    @Override
+    public List<Product> fetchAllProducts() {
+        return productJpaRepository
+                .findAll();
     }
 }
