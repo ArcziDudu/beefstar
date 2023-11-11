@@ -20,6 +20,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { DragDirective } from './drag.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +31,8 @@ import { AddNewProductComponent } from './add-new-product/add-new-product.compon
     LoginComponent,
     HeaderComponent,
     FobiddenComponent,
-    AddNewProductComponent
+    AddNewProductComponent,
+    DragDirective
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import { AddNewProductComponent } from './add-new-product/add-new-product.compon
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatGridListModule
   ],
   providers: [
     AuthGuard,
