@@ -26,7 +26,7 @@ export class AddNewProductComponent implements OnInit{
 
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
     
   }
 
@@ -36,7 +36,8 @@ export class AddNewProductComponent implements OnInit{
 
    this.productService.addProduct(productFormData).subscribe(
     (Response: Product) => {
-     productForm.reset()
+     productForm.reset();
+     this.product.productImages = [];
     },
     (error: HttpErrorResponse) => {
       console.log(error)

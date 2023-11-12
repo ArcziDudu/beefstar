@@ -12,4 +12,14 @@ export class ProductService {
   public addProduct(product: FormData){
     return this.httpClient.post<Product>("http://localhost:8080/beefstar/product/add", product);
   }
+
+  public getAllProducts(){
+    return this.httpClient.get<Product[]>("http://localhost:8080/beefstar/product/all");
+  }
+
+  public deleteProduct(productId: number){
+   return this.httpClient.delete<Product[]>("http://localhost:8080/beefstar/product/delete/"+productId);
+  }
+
+
 }
