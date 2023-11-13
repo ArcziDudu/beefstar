@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-
 public class ProductJpaImpl implements ProductDao {
     @Autowired
     private ProductJpaRepository productJpaRepository;
@@ -29,4 +29,16 @@ public class ProductJpaImpl implements ProductDao {
         return productJpaRepository
                 .findAll();
     }
+
+    @Override
+    public void deleteProductDetailsById(Integer productId) {
+        productJpaRepository.deleteById(productId);
+    }
+
+    @Override
+    public Optional<Product> fetchProductDetailsById(Integer productId) {
+        return productJpaRepository.findById(productId);
+    }
+
+
 }

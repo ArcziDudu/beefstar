@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -26,6 +23,9 @@ public class ProductController {
     @Autowired
     private ImageService imageService;
     public static final String ADD_PRODUCT = "/product/add";
+    public static final String ALL_PRODUCT = "/product/all";
+    public static final String ONE_PRODUCT_BY_ID = "/product/details/{productId}";
+    public static final String DELETE_PRODUCT = "/product/delete/{productId}";
 
     @PreAuthorize("hasRole('Admin')")
     @PostMapping(value = ADD_PRODUCT, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
@@ -39,10 +39,19 @@ public class ProductController {
             return null;
         }
     }
-
-    @GetMapping("/product/all")
+    @PreAuthorize("hasRole('Admin')")
+    @GetMapping(ALL_PRODUCT)
     public ResponseEntity<List<Product>> getAllProduct(){
         return ResponseEntity.ok(productService.fetchAllProducts());
     }
-
+    @PreAuthorize("hasRole('Admin')")
+    @GetMapping(ONE_PRODUCT_BY_ID)
+    public ResponseEntity<Product> getProductDetailsById(@PathVariable("productId") Integer productId){
+        return ResponseEntity.ok(productService.fetchProductDetails(productId));
+    }
+    @PreAuthorize("hasRole('Admin')")
+    @DeleteMapping(DELETE_PRODUCT)
+    public void deleteProductDetails(@PathVariable("productId") Integer productId){
+        productService.deleteProductDetails(productId);
+    }
 }

@@ -5,8 +5,12 @@ import com.beefstar.beefstar.infrastructure.entity.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.Optional;
+
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface ProductMapper {
 
     Product mapFromDto(ProductDTO product);
+
+
 }
