@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -68,4 +69,11 @@ public class UserService {
         userInfoDao.save(user);
     }
 
+    public UserInfo findUserById(String userId){
+        Optional<UserInfo> byId = userInfoDao.findById(userId);
+        if(byId.isEmpty()){
+            throw  new RuntimeException();
+        }
+        return byId.get();
+    }
 }

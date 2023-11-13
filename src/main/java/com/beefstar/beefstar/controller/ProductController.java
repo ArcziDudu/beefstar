@@ -39,12 +39,10 @@ public class ProductController {
             return null;
         }
     }
-    @PreAuthorize("hasRole('Admin')")
     @GetMapping(ALL_PRODUCT)
     public ResponseEntity<List<Product>> getAllProduct(){
         return ResponseEntity.ok(productService.fetchAllProducts());
     }
-    @PreAuthorize("hasRole('Admin')")
     @GetMapping(ONE_PRODUCT_BY_ID)
     public ResponseEntity<Product> getProductDetailsById(@PathVariable("productId") Integer productId){
         return ResponseEntity.ok(productService.fetchProductDetails(productId));
