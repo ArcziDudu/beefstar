@@ -1,3 +1,24 @@
-.card{
-    padding: 20px;
+mat-grid-tile{
+    border: 1px solid grey;
+    border-radius: 10px;
+}
+.product-name{
+    font-weight: bold;
+    text-align: center;
+}
+.image-container{
+    position: relative;
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.1); 
+    height: 250px;
+}
+
+.home-page-product-image{
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   right: 0;
+   margin: auto;
+   height: 200px;
+   max-width: 100%;
 }

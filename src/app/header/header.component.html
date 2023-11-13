@@ -9,10 +9,10 @@
   <button *ngIf="isLoggedIn()" (click)="logout()" mat-raised-button color="warn">Logout</button>
 </mat-toolbar>
 
-<div class="container">
+<div class="container" style="border-top: 3px solid white; ">
   <mat-toolbar color="primary" *ngIf="isLoggedIn()">
     <div class="container">
-      <button mat-raised-button color="primary" routerLink="/">Home</button>
+      <button mat-raised-button color="primary" routerLink="/home">Home</button>
       <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="/product/add">Add new product</button>
       <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="/product/details">Show Product Details</button>
     </div>
