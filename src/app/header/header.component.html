@@ -14,7 +14,7 @@
     <div class="container">
       <button mat-raised-button color="primary" routerLink="/home">Home</button>
       <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="/product/add">Add new product</button>
-      <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="/product/details">Show Product Details</button>
+      <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="product/all/details">Show Product Details</button>
     </div>
   </mat-toolbar>
 </div>
