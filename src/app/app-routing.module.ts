@@ -8,6 +8,7 @@ import { FobiddenComponent } from './fobidden/fobidden.component';
 import { AuthGuard } from './_auth/auth.guard';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 import { ShowProductDetailsComponent } from './show-product-details/show-product-details.component';
+import { ProductResolveService } from './product-resolve.service';
 
 const routes: Routes = [
   {path:'', component:HomeComponent},
@@ -15,8 +16,17 @@ const routes: Routes = [
   {path:'user', component:UserComponent, canActivate:[AuthGuard], data:{roles:['User']}},
   {path:'login', component:LoginComponent},
   {path:'fobidden', component:FobiddenComponent},
-  {path: 'addNewProduct', component: AddNewProductComponent, canActivate:[AuthGuard], data:{roles:['Admin']}},
-  {path: 'showProductDetails', component: ShowProductDetailsComponent}
+  {path: 'product/add', component: AddNewProductComponent, canActivate:[AuthGuard], data:{roles:['Admin']}, 
+
+  resolve: {
+    product: ProductResolveService
+  }
+},
+  {path: 'product/edit', component: AddNewProductComponent, canActivate:[AuthGuard], data:{roles:['Admin']},
+  resolve: {
+    product: ProductResolveService
+  }},
+  {path: 'product/details', component: ShowProductDetailsComponent}
 ];
 
 @NgModule({

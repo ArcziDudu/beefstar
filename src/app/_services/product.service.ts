@@ -17,6 +17,10 @@ export class ProductService {
     return this.httpClient.get<Product[]>("http://localhost:8080/beefstar/product/all");
   }
 
+  public getProductDetailsById(productId){
+    return this.httpClient.get<Product>("http://localhost:8080/beefstar/product/details/"+productId);
+  }
+
   public deleteProduct(productId: number){
    return this.httpClient.delete<Product[]>("http://localhost:8080/beefstar/product/delete/"+productId);
   }

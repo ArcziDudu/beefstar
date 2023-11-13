@@ -13,8 +13,8 @@
   <mat-toolbar color="primary" *ngIf="isLoggedIn()">
     <div class="container">
       <button mat-raised-button color="primary" routerLink="/">Home</button>
-      <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="/addNewProduct">Add new product</button>
-      <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="/showProductDetails">Show Product Details</button>
+      <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="/product/add">Add new product</button>
+      <button *ngIf="! isUser()" mat-raised-button color="primary" routerLink="/product/details">Show Product Details</button>
     </div>
   </mat-toolbar>
 </div>
