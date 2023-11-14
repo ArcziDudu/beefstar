@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../_model/product_model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-view-details',
@@ -12,7 +12,8 @@ export class ProductViewDetailsComponent implements OnInit{
 
   product!: Product;
 
-  constructor(  private activatedRoute: ActivatedRoute){
+  constructor(  private activatedRoute: ActivatedRoute,
+    private router: Router){
 
   }
 
@@ -28,5 +29,11 @@ export class ProductViewDetailsComponent implements OnInit{
   }
   public changeIndex(index){
     this.selectedProductIndex = index;
+  }
+
+  public buyProduct(productId){
+    this.router.navigate(['/product/order',{
+      isSingleProductCheckout: true, id: productId
+    }]);
   }
 }

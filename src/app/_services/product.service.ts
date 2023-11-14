@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../_model/product_model';
+import { OrderDetails } from '../_model/order-details.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,11 @@ export class ProductService {
    return this.httpClient.delete<Product[]>("http://localhost:8080/beefstar/product/delete/"+productId);
   }
 
+  public getProductDetails(isSingleProductCheckout, productId){
+    return this.httpClient.get<Product[]>("http://localhost:8080/beefstar/product/order/"+isSingleProductCheckout+"/"+productId);
+  }
 
+  public placeOrder(orderDetails: OrderDetails){
+    return this.httpClient.post("http://localhost:8080/beefstar/order/new", orderDetails);
+  }
 }

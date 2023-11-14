@@ -25,7 +25,7 @@
                     <b>$ {{product.productActualPrice}}</b>
                 </div>
                 <div class="mt-5 text-center">
-                    <button mat-raised-button color="warn" style="width: 300px;">Buy now</button>
+                    <button mat-raised-button color="warn" style="width: 300px;" (click)="buyProduct(product.productId)">Buy now</button>
                 </div>
             </div>
         </div>
