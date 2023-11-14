@@ -2,8 +2,8 @@ package com.beefstar.beefstar.service;
 
 
 import com.beefstar.beefstar.dao.UserInfoDao;
-import com.beefstar.beefstar.infrastructure.entity.JwtRequest;
-import com.beefstar.beefstar.infrastructure.entity.JwtResponse;
+import com.beefstar.beefstar.infrastructure.configuration.security.model.JwtRequest;
+import com.beefstar.beefstar.infrastructure.configuration.security.model.JwtResponse;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
 import com.beefstar.beefstar.infrastructure.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +33,8 @@ public class JwtService implements UserDetailsService {
     private AuthenticationManager authenticationManager;
 
     public JwtResponse createJwtToken(JwtRequest jwtRequest) throws Exception {
-        String userName = jwtRequest.getUserName();
-        String userPassword = jwtRequest.getUserPassword();
+        String userName = jwtRequest.userName();
+        String userPassword = jwtRequest.userPassword();
         authenticate(userName, userPassword);
 
         UserDetails userDetails = loadUserByUsername(userName);

@@ -2,7 +2,6 @@ package com.beefstar.beefstar.infrastructure.JpaImpl;
 
 import com.beefstar.beefstar.dao.OrderDetailDao;
 import com.beefstar.beefstar.infrastructure.entity.OrderDetail;
-import com.beefstar.beefstar.infrastructure.entity.OrderInput;
 import com.beefstar.beefstar.infrastructure.jpaRepository.OrderDetailDaoJpaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

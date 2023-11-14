@@ -1,4 +1,4 @@
-package com.beefstar.beefstar.infrastructure.configuration;
+package com.beefstar.beefstar.infrastructure.configuration.security;
 
 import com.beefstar.beefstar.infrastructure.util.JwtUtil;
 import com.beefstar.beefstar.service.JwtService;

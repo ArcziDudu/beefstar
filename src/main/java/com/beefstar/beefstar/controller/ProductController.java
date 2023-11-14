@@ -25,6 +25,7 @@ public class ProductController {
     public static final String ADD_PRODUCT = "/product/add";
     public static final String ALL_PRODUCT = "/product/all";
     public static final String ONE_PRODUCT_BY_ID = "/product/details/{productId}";
+    public static final String ONE_PRODUCT_BY_ID_CHECKOUT = "/product/order/{isSingleProductCheckout}/{productId}";
     public static final String DELETE_PRODUCT = "/product/delete/{productId}";
 
     @PreAuthorize("hasRole('Admin')")
@@ -51,5 +52,12 @@ public class ProductController {
     @DeleteMapping(DELETE_PRODUCT)
     public void deleteProductDetails(@PathVariable("productId") Integer productId){
         productService.deleteProductDetails(productId);
+    }
+    @PreAuthorize("hasRole('User')")
+    @GetMapping(ONE_PRODUCT_BY_ID_CHECKOUT)
+    public ResponseEntity<List<Product>> getProductDetailsCheckout(
+            @PathVariable(name = "isSingleProductCheckout") boolean isSingleProductCheckout,
+            @PathVariable(name = "productId") Integer productId){
+        return ResponseEntity.ok(productService.fetchProductDetails(isSingleProductCheckout,productId));
     }
 }

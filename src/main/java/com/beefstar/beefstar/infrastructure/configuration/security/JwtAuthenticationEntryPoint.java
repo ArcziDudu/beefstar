@@ -1,4 +1,4 @@
-package com.beefstar.beefstar.infrastructure.configuration;
+package com.beefstar.beefstar.infrastructure.configuration.security;
 
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;

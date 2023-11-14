@@ -1,8 +1,8 @@
 package com.beefstar.beefstar.controller;
 
 
-import com.beefstar.beefstar.infrastructure.entity.JwtRequest;
-import com.beefstar.beefstar.infrastructure.entity.JwtResponse;
+import com.beefstar.beefstar.infrastructure.configuration.security.model.JwtRequest;
+import com.beefstar.beefstar.infrastructure.configuration.security.model.JwtResponse;
 import com.beefstar.beefstar.service.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;

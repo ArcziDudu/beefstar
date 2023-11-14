@@ -26,7 +26,7 @@ public class UserService {
     private NewUserMapper newUserMapper;
 
     public UserInfo registerNewUser(UserInfoDTO newUser) {
-        RoleDTO role = roleDao.findById("User").orElseThrow(()->new UsernameNotFoundException("user not found"));;
+        RoleDTO role = roleDao.findById("User").orElseThrow(()->new UsernameNotFoundException("role not found"));;
         return userInfoDao.save(UserInfoDTO.builder()
                 .userName(newUser.userName())
                 .userFirstName(newUser.userFirstName())

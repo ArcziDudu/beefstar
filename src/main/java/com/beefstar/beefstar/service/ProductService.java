@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +32,15 @@ public class ProductService {
 
     public Product fetchProductDetails(Integer productId) {
      return productDao.fetchProductDetailsById(productId).orElseThrow();
+    }
+    public List<Product> fetchProductDetails(Boolean isProductCheckout, Integer productId) {
+        List<Product>  list = new ArrayList<>();
+        if(isProductCheckout){
+            list.add(productDao.fetchProductDetailsById(productId).orElseThrow());
+            return list;
+        }
+        return new ArrayList<>();
+
     }
 }
 

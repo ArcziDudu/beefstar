@@ -1,7 +1,7 @@
 package com.beefstar.beefstar.controller;
 
+import com.beefstar.beefstar.domain.OrderInput;
 import com.beefstar.beefstar.infrastructure.entity.OrderDetail;
-import com.beefstar.beefstar.infrastructure.entity.OrderInput;
 import com.beefstar.beefstar.service.OrderDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
