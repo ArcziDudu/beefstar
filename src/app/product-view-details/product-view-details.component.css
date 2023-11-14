@@ -1,6 +1,8 @@
 .product-information{
+    height: 500px;
     font-size: medium;
 }
+
 .image-container{
     height: 500px;
     overflow: hidden;

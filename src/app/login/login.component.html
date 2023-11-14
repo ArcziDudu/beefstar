@@ -1,5 +1,6 @@
 
         <div class="card container mt-5" style="padding: 20px;">
+            <div>
             <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
 
                 <div class="login-box container">
@@ -25,9 +26,16 @@
                     </mat-form-field>
 
                 <button type="submit" mat-raised-button color="primary" class="w-50 container">Login</button>
-                </div>
-               
+            </div>
             </form>
+             
+        </div> 
+        <div class="text-center">
+            <br>
+            <button class="w-50 container" mat-raised-button type="button" color="primary" (click)="registerUser()">Create account</button>
         </div>
-
+      
+        </div>
+       
+     
 
