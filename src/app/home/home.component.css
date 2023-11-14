@@ -1,3 +1,14 @@
+.hero{
+    margin: 0 auto;
+    height: 400px;
+     width: 100%;
+     max-width: 1920px;
+  background-image: url('src/assets/hero.jpg');
+   background-size: cover;
+   background-repeat: no-repeat;
+   background-position: center;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
 mat-grid-tile{
     border: 1px solid grey;
     border-radius: 10px;

@@ -14,6 +14,9 @@ import { Route, Router } from '@angular/router';
 export class HomeComponent implements OnInit{
 
   productDetails: Product[] = [];
+  pageNumber: number = 0;
+
+  showLoadButton = false;
 
   constructor(
     private productService: ProductService,
@@ -23,20 +26,38 @@ export class HomeComponent implements OnInit{
   ngOnInit(): void {
     this.getAllProducts();
   }
-  public getAllProducts(){
-    this.productService.getAllProducts()
+
+  searchByKeyword(searchKeyword){
+    console.log(searchKeyword);
+    this.pageNumber = 0;
+    this.productDetails = [];
+    this.getAllProducts(searchKeyword);
+  }
+
+  public getAllProducts(searchKey: string = ""){
+    this.productService.getAllProducts(this.pageNumber, searchKey)
     .pipe(
       map((x: Product[], i) => x.map((product: Product)=> this.imageProcessingService.createImages(product)))
     )
     .subscribe(
-      (resp: Product[]) =>{
+      (resp: Product[]) => {
         console.log(resp);
-        this.productDetails = resp;
+        if(resp.length == 6){
+          this.showLoadButton =true;
+        }else{
+          this.showLoadButton = false;
+        }
+        resp.forEach(p=>this.productDetails.push(p));
       }, (error: HttpErrorResponse)=>{
         console.log(error);
       }
 
     );
+  }
+
+  loadMoreProducts(){
+    this.pageNumber = this.pageNumber+1;
+    this.getAllProducts();
   }
 
   public showProductDetails(productId){

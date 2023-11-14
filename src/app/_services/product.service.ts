@@ -14,8 +14,8 @@ export class ProductService {
     return this.httpClient.post<Product>("http://localhost:8080/beefstar/product/add", product);
   }
 
-  public getAllProducts(){
-    return this.httpClient.get<Product[]>("http://localhost:8080/beefstar/product/all");
+  public getAllProducts(pageNumber, searchKey: string = ""){
+    return this.httpClient.get<Product[]>("http://localhost:8080/beefstar/product/all?pageNumber="+pageNumber+"&searchKey="+searchKey);
   }
 
   public getProductDetailsById(productId){
