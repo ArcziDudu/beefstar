@@ -6,6 +6,7 @@ import com.beefstar.beefstar.infrastructure.entity.Product;
 import com.beefstar.beefstar.service.ImageService;
 import com.beefstar.beefstar.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -41,8 +42,11 @@ public class ProductController {
         }
     }
     @GetMapping(ALL_PRODUCT)
-    public ResponseEntity<List<Product>> getAllProduct(){
-        return ResponseEntity.ok(productService.fetchAllProducts());
+    public ResponseEntity<List<Product>> getAllProduct(@RequestParam(defaultValue = "0") int pageNumber,
+                                                       @RequestParam(defaultValue = "") String searchKey){
+        Page<Product> products = productService.fetchAllProducts(pageNumber, searchKey);
+
+        return ResponseEntity.ok(products.getContent());
     }
     @GetMapping(ONE_PRODUCT_BY_ID)
     public ResponseEntity<Product> getProductDetailsById(@PathVariable("productId") Integer productId){

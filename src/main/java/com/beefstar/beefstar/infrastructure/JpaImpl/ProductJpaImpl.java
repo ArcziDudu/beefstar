@@ -6,6 +6,8 @@ import com.beefstar.beefstar.infrastructure.entity.Product;
 import com.beefstar.beefstar.infrastructure.jpaRepository.ProductJpaRepository;
 import com.beefstar.beefstar.infrastructure.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,6 +30,17 @@ public class ProductJpaImpl implements ProductDao {
     public List<Product> fetchAllProducts() {
         return productJpaRepository
                 .findAll();
+    }
+
+    @Override
+    public Page<Product> fetchAllProducts(Pageable pageable) {
+        return productJpaRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Product> findByProductName(String key1, String key2, Pageable pageable) {
+        return productJpaRepository.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(
+                key1,key2,pageable);
     }
 
     @Override
