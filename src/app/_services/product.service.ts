@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from '../_model/product_model';
 import { OrderDetails } from '../_model/order-details.model';
+import { MyOrderDetails } from '../_model/order.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +16,10 @@ export class ProductService {
     return this.httpClient.post<Product>("http://localhost:8080/beefstar/product/add", product);
   }
 
+  public markAsDelivered(orderId){
+    const url = `http://localhost:8080/beefstar/order/markAsDelivered/${orderId}`;
+    return this.httpClient.patch(url,null);
+  }
   public getAllProducts(pageNumber, searchKey: string = ""){
     return this.httpClient.get<Product[]>("http://localhost:8080/beefstar/product/all?pageNumber="+pageNumber+"&searchKey="+searchKey);
   }
@@ -44,6 +50,14 @@ export class ProductService {
   }
   public deleteCart(cartId){
     return this.httpClient.delete("http://localhost:8080/beefstar/cartDelete/"+cartId)
+  }
+
+  public getMyOrdersDetails(): Observable<MyOrderDetails[]>{
+    return this.httpClient.get<MyOrderDetails[]>("http://localhost:8080/beefstar/order/details")
+  }
+  
+  public getAllOrdersDetailsForAdmin(): Observable<MyOrderDetails[]>{
+    return this.httpClient.get<MyOrderDetails[]>("http://localhost:8080/beefstar/order/details/all")
   }
 
 }

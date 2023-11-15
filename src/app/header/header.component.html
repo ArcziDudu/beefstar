@@ -13,9 +13,11 @@
   <mat-toolbar color="primary" *ngIf="isLoggedIn()" style="border-radius: 15px;">
     <div class="container" style="display: flex;justify-content: space-between;">
       <button mat-raised-button color="warn" routerLink="/home">Home</button>
+      <button *ngIf="isUser()" mat-raised-button color="warn" routerLink="/account">My account</button>
       <button *ngIf="isUser()" mat-raised-button color="warn" routerLink="/cart">Cart</button>
       <button *ngIf="! isUser()" mat-raised-button color="warn" routerLink="/product/add">Add new product</button>
       <button *ngIf="! isUser()" mat-raised-button color="warn" routerLink="product/all/details">Show Product Details</button>
+      <button *ngIf="! isUser()" mat-raised-button color="warn" routerLink="admin/product-details">Order information</button>
     </div>
   </mat-toolbar>
 </div>
