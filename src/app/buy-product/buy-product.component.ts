@@ -16,7 +16,7 @@ import { OrderConfirmationComponent } from '../order-confirmation/order-confirma
 })
 export class BuyProductComponent implements OnInit{
 
-
+  isSingleProductCheckout:string | null='';
   productDetails: Product[] = [];
 
   orderDetails: OrderDetails = {
@@ -30,9 +30,13 @@ export class BuyProductComponent implements OnInit{
   constructor(private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private router: Router,
-    public dialog: MatDialog){}
+    public dialog: MatDialog){
+
+    }
+    
     ngOnInit(): void {
       const data = this.activatedRoute.snapshot.data['productDetails'];
+      this.isSingleProductCheckout = this.activatedRoute.snapshot.paramMap.get("isSingleProductCheckout");
       
       if (data && data.length > 0) {
         this.productDetails = data;
@@ -48,8 +52,12 @@ export class BuyProductComponent implements OnInit{
       }
     }
     
+    isFieldEmpty(fieldName: string): boolean {
+      return !this.orderDetails[fieldName].trim(); 
+    }
+
   placeOrder(orderForm: NgForm){
-    this.productService.placeOrder(this.orderDetails).subscribe(
+    this.productService.placeOrder(this.orderDetails, this.isSingleProductCheckout).subscribe(
       (resp)=>{
         console.log(resp);
         orderForm.reset();

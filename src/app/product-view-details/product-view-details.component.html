@@ -6,17 +6,18 @@
             </div>
             <div class="mt-2">
                 <mat-grid-list cols="4" gutterSize="10" rowHeight="1:1">
-                    <mat-grid-tile *ngFor="let file of product?.productImages; let i = index;"(click)="changeIndex(i)"  style="border: 1px solid black; cursor: pointer;">
-                        <img [src]="file.url" height="100px" >
+                    <mat-grid-tile *ngFor="let file of product?.productImages; let i = index;" (click)="changeIndex(i)"
+                        style="border: 1px solid black; cursor: pointer;">
+                        <img [src]="file.url" height="100px">
                     </mat-grid-tile>
                 </mat-grid-list>
             </div>
-          
+
         </div>
         <div class="col-6">
             <div class="product-information">
                 <div class="mt-4">
-                   <h1  style="font-weight: bold;">{{product.productName}}</h1> 
+                    <h1 style="font-weight: bold;">{{product.productName}}</h1>
                 </div>
                 <div class="mt-4">
                     {{product.productDescription}}
@@ -24,8 +25,24 @@
                 <div class="mt-5">
                     <b>$ {{product.productActualPrice}}</b>
                 </div>
+                <br>
+                <div class="long-description">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque veniam, ratione asperiores unde,
+                        porro delectus quas totam architecto repellendus libero est voluptatibus natus soluta, eaque
+                        mollitia assumenda corporis ipsa numquam. Tenetur iusto error impedit ullam quisquam mollitia ex
+                        distinctio necessitatibus a nesciunt, harum autem! Ea recusandae nesciunt excepturi nemo
+                        consequatur reprehenderit non, molestias neque pariatur earum in itaque esse officiis
+                        cupiditate! Cum quos impedit et consequatur veritatis non inventore cupiditate sit magni hic,
+                        eaque rem laudantium. Voluptatum quidem nesciunt quae pariatur dicta alias iste exercitationem
+                        quos sit, vitae earum ratione culpa, ipsa provident, qui voluptas tempore. Dolorum voluptatem
+                        suscipit facere.</p>
+                </div>
                 <div class="mt-5 text-center">
-                    <button mat-raised-button color="warn" style="width: 300px;" (click)="buyProduct(product.productId)">Buy now</button>
+                    <button mat-raised-button color="warn" style="width: 300px;"
+                        (click)="buyProduct(product.productId)">Buy now</button>
+                    &nbsp;
+                    <button mat-raised-button style="width: 300px;" (click)="addToCart(product.productId)">Add to
+                        cart</button>
                 </div>
             </div>
         </div>

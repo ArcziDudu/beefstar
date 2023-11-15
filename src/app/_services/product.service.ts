@@ -30,7 +30,20 @@ export class ProductService {
     return this.httpClient.get<Product[]>("http://localhost:8080/beefstar/product/order/"+isSingleProductCheckout+"/"+productId);
   }
 
-  public placeOrder(orderDetails: OrderDetails){
-    return this.httpClient.post("http://localhost:8080/beefstar/order/new", orderDetails);
+  public placeOrder(orderDetails: OrderDetails, isCartCheckout){
+    return this.httpClient.post("http://localhost:8080/beefstar/order/new/"+isCartCheckout, orderDetails);
   }
+
+  public addToCart(productId: number) {
+    const url = `http://localhost:8080/beefstar/addToCart/${productId}`;
+    return this.httpClient.post(url, null);
+  }
+  
+  public getCartDetails(){
+    return this.httpClient.get("http://localhost:8080/beefstar/cartDetails");
+  }
+  public deleteCart(cartId){
+    return this.httpClient.delete("http://localhost:8080/beefstar/cartDelete/"+cartId)
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../_model/product_model';
 import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ProductService } from '../_services/product.service';
 
 @Component({
   selector: 'app-product-view-details',
@@ -13,7 +14,8 @@ export class ProductViewDetailsComponent implements OnInit{
   product!: Product;
 
   constructor(  private activatedRoute: ActivatedRoute,
-    private router: Router){
+    private router: Router,
+    private productService: ProductService){
 
   }
 
@@ -27,6 +29,18 @@ export class ProductViewDetailsComponent implements OnInit{
       }
     });
   }
+
+  addToCart(productId){
+    console.log(productId)
+    this.productService.addToCart(productId).subscribe(
+      (resp) =>{
+        console.log(resp)
+      }, (err)=>{
+        console.log(err)
+      }
+    );
+  }
+
   public changeIndex(index){
     this.selectedProductIndex = index;
   }
@@ -36,4 +50,5 @@ export class ProductViewDetailsComponent implements OnInit{
       isSingleProductCheckout: true, id: productId
     }]);
   }
+
 }

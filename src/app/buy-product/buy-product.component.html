@@ -7,6 +7,7 @@
                       <mat-form-field appearance="outline" class="w-100">
                         <mat-label>Full name</mat-label>
                         <input matInput placeholder="Full name" [(ngModel)]="orderDetails.userFullName" name="fullName">
+ 
                       </mat-form-field>
 
                       <mat-form-field appearance="outline" class="w-100">
@@ -20,7 +21,7 @@
                       </mat-form-field>
 
                       <div align="right">
-                        <button type="submit" mat-stroked-button color="primary">Place order</button>
+                        <button type="submit" mat-stroked-button color="primary" [disabled]="isFieldEmpty('userFullName')">Place order</button>
                       </div>
                 </form>
             </div>
