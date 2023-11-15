@@ -59,12 +59,10 @@ public class CartService {
     }
 
     public void deleteCart(Cart c) {
-        System.out.println("hej");
          cartDao.deleteCart(c);
     }
 
     public void deleteCart(Integer cartId) {
-        System.out.println("hej");
         cartDao.deleteCartById(cartId);
     }
 }

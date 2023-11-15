@@ -17,8 +17,7 @@ public class OrderDetail {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer orderId;
     private String orderFullName;
-    private String orderCode;
-    private String orderFullOrder;
+    private String orderFullAddress;
     private String  orderContactNumber;
     private String orderStatus;
     private BigDecimal orderAmount;
