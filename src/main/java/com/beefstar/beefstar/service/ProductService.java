@@ -2,7 +2,10 @@ package com.beefstar.beefstar.service;
 
 import com.beefstar.beefstar.dao.ProductDao;
 import com.beefstar.beefstar.domain.ProductDTO;
+import com.beefstar.beefstar.infrastructure.configuration.security.JwtRequestFilter;
+import com.beefstar.beefstar.infrastructure.entity.Cart;
 import com.beefstar.beefstar.infrastructure.entity.Product;
+import com.beefstar.beefstar.infrastructure.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.domain.Page;
@@ -19,6 +22,11 @@ import java.util.List;
 public class ProductService {
     @Autowired
     ProductDao productDao;
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    CartService cartService;
 
     @Transactional
     public Product addNewProduct(ProductDTO productDTO) {
@@ -35,6 +43,7 @@ public class ProductService {
 
     }
 
+    @Transactional
     public void deleteProductDetails(Integer productId) {
         productDao.deleteProductDetailsById(productId);
     }
@@ -45,12 +54,13 @@ public class ProductService {
 
     public List<Product> fetchProductDetails(Boolean isProductCheckout, Integer productId) {
         List<Product> list = new ArrayList<>();
-        if (isProductCheckout) {
+        if (isProductCheckout && productId != 0) {
             list.add(productDao.fetchProductDetailsById(productId).orElseThrow());
             return list;
+        }else {
+            List<Cart> cartDetails = cartService.getCartDetails();
+            return cartDetails.stream().map(Cart::getProduct).toList();
         }
-        return new ArrayList<>();
-
     }
 }
 

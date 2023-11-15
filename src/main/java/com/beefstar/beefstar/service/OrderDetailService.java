@@ -1,5 +1,6 @@
 package com.beefstar.beefstar.service;
 
+import com.beefstar.beefstar.dao.CartDao;
 import com.beefstar.beefstar.dao.OrderDetailDao;
 import com.beefstar.beefstar.domain.OrderInput;
 import com.beefstar.beefstar.domain.OrderProductQuantity;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,9 +25,11 @@ public class OrderDetailService {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private CartService cartService;
 
 
-    public OrderDetail placeOrder(OrderInput orderInput) {
+    public OrderDetail placeOrder(OrderInput orderInput, boolean isSingleProductCheckout) {
         List<OrderProductQuantity> productQuantityList = orderInput.orderProductQuantityList();
         OrderDetail orderDetailReturned = null;
 
@@ -47,7 +51,13 @@ public class OrderDetailService {
                                             .toString())))
                     .product(product)
                     .user(userById)
+                    .orderDate(OffsetDateTime.now())
                     .build();
+
+            if(!isSingleProductCheckout){
+                List<Cart> cartByUser = cartService.findByUser();
+                cartByUser.forEach(c -> cartService.deleteCart(c));
+            }
             orderDetailReturned = orderDetailDao.saveOrder(orderDetail);
         }
         return orderDetailReturned;

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 
 @Entity
 @Getter
@@ -21,6 +22,7 @@ public class OrderDetail {
     private String  orderContactNumber;
     private String orderStatus;
     private BigDecimal orderAmount;
+    private OffsetDateTime orderDate;
     @OneToOne
     private Product product;
     @OneToOne
