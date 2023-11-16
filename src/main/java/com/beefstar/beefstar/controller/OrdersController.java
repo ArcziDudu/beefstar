@@ -14,7 +14,7 @@ import java.util.List;
 public class OrdersController {
     private final String NEW_ORDER = "/order/new/{isSingleProductCheckout}";
     private final String ORDER_DETAILS = "/order/details";
-    private final String ALL_ORDER_DETAILS = "/order/details/all";
+    private final String ALL_ORDER_DETAILS = "/order/details/all/{status}";
     private final String ORDER_STATUS = "/order/markAsDelivered/{orderId}";
     @Autowired
     private OrderDetailService orderDetailService;
@@ -36,8 +36,8 @@ public class OrdersController {
 
     @PreAuthorize("hasRole('Admin')")
     @GetMapping(ALL_ORDER_DETAILS)
-    public ResponseEntity<List<OrderDetail>>  getAllOrderDetails(){
-      return ResponseEntity.ok(orderDetailService.getAllOrdersDetails());
+    public ResponseEntity<List<OrderDetail>>  getAllOrderDetails(@PathVariable(name = "status") String status){
+      return ResponseEntity.ok(orderDetailService.getAllOrdersDetails(status));
     }
 
     @PreAuthorize("hasRole('Admin')")
@@ -45,4 +45,6 @@ public class OrdersController {
     public ResponseEntity<OrderDetail> markOrderAsDelivered(@PathVariable(name = "orderId") Integer orderId){
         return ResponseEntity.ok(orderDetailService.markAsDelivered(orderId));
     }
+
+
 }

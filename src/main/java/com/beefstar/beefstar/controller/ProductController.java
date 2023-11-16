@@ -27,7 +27,7 @@ public class ProductController {
     public static final String ALL_PRODUCT = "/product/all";
     public static final String ONE_PRODUCT_BY_ID = "/product/details/{productId}";
     public static final String ONE_PRODUCT_BY_ID_CHECKOUT = "/product/order/{isSingleProductCheckout}/{productId}";
-    public static final String DELETE_PRODUCT = "/product/delete/{productId}";
+
 
     @PreAuthorize("hasRole('Admin')")
     @PostMapping(value = ADD_PRODUCT, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
@@ -41,27 +41,26 @@ public class ProductController {
             return null;
         }
     }
+
     @GetMapping(ALL_PRODUCT)
-    public ResponseEntity<List<Product>> getAllProduct(@RequestParam(defaultValue = "0") int pageNumber,
-                                                       @RequestParam(defaultValue = "") String searchKey){
+    public ResponseEntity<List<Product>> getAllProduct(
+            @RequestParam(defaultValue = "0") int pageNumber,
+            @RequestParam(defaultValue = "") String searchKey) {
         Page<Product> products = productService.fetchAllProducts(pageNumber, searchKey);
 
         return ResponseEntity.ok(products.getContent());
     }
+
     @GetMapping(ONE_PRODUCT_BY_ID)
-    public ResponseEntity<Product> getProductDetailsById(@PathVariable("productId") Integer productId){
+    public ResponseEntity<Product> getProductDetailsById(@PathVariable("productId") Integer productId) {
         return ResponseEntity.ok(productService.fetchProductDetails(productId));
     }
-    @PreAuthorize("hasRole('Admin')")
-    @DeleteMapping(DELETE_PRODUCT)
-    public void deleteProductDetails(@PathVariable("productId") Integer productId){
-        productService.deleteProductDetails(productId);
-    }
+
     @PreAuthorize("hasRole('User')")
     @GetMapping(ONE_PRODUCT_BY_ID_CHECKOUT)
     public ResponseEntity<List<Product>> getProductDetailsCheckout(
             @PathVariable(name = "isSingleProductCheckout") boolean isSingleProductCheckout,
-            @PathVariable(name = "productId") Integer productId){
-        return ResponseEntity.ok(productService.fetchProductDetails(isSingleProductCheckout,productId));
+            @PathVariable(name = "productId") Integer productId) {
+        return ResponseEntity.ok(productService.fetchProductDetails(isSingleProductCheckout, productId));
     }
 }

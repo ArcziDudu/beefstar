@@ -26,11 +26,6 @@ public class ProductJpaImpl implements ProductDao {
         return productJpaRepository.save(productMapper.mapFromDto(product));
     }
 
-    @Override
-    public List<Product> fetchAllProducts() {
-        return productJpaRepository
-                .findAll();
-    }
 
     @Override
     public Page<Product> fetchAllProducts(Pageable pageable) {
@@ -38,9 +33,10 @@ public class ProductJpaImpl implements ProductDao {
     }
 
     @Override
-    public Page<Product> findByProductName(String key1, String key2, Pageable pageable) {
-        return productJpaRepository.findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCase(
-                key1,key2,pageable);
+    public Page<Product> findByProductName(String key1, String key2,String key3, Pageable pageable) {
+        return productJpaRepository
+                .findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCaseOrCategoryContainingIgnoreCase(
+                key1,key2,key3,pageable);
     }
 
     @Override

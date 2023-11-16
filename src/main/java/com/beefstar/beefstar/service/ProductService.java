@@ -8,6 +8,10 @@ import com.beefstar.beefstar.infrastructure.entity.Product;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.cache.Cache;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = "products")
 public class ProductService {
     @Autowired
     ProductDao productDao;
@@ -27,28 +32,30 @@ public class ProductService {
 
     @Autowired
     CartService cartService;
-
+    @CacheEvict(value = "products", key = "#productId")
+    public void evictProductCache(Integer productId) {
+    }
     @Transactional
+    @CacheEvict(value = "products", allEntries = true)
     public Product addNewProduct(ProductDTO productDTO) {
         return productDao.save(productDTO);
     }
-
+    @Cacheable("products")
     public Page<Product> fetchAllProducts(int pageNumber, String searchKey) {
+        System.err.println("wywołuje metode przy odswiezaniu strony");
         Pageable pageable = PageRequest.of(pageNumber, 6);
         if(searchKey.isEmpty()){
+
             return productDao.fetchAllProducts(pageable);
         }else {
-          return productDao.findByProductName(searchKey,searchKey, pageable);
+            System.err.println("wywołuje metode przy pobieraniu po słowie  strony");
+            return productDao.findByProductName(searchKey,searchKey,searchKey, pageable);
         }
-
     }
 
-    @Transactional
-    public void deleteProductDetails(Integer productId) {
-        productDao.deleteProductDetailsById(productId);
-    }
-
+    @Cacheable
     public Product fetchProductDetails(Integer productId) {
+        System.err.println("wywołuje product detail");
         return productDao.fetchProductDetailsById(productId).orElseThrow();
     }
 

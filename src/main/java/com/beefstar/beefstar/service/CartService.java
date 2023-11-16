@@ -58,10 +58,11 @@ public class CartService {
         return cartDao.findCartByUser(user);
     }
 
+    @Transactional
     public void deleteCart(Cart c) {
          cartDao.deleteCart(c);
     }
-
+    @Transactional
     public void deleteCart(Integer cartId) {
         cartDao.deleteCartById(cartId);
     }

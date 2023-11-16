@@ -11,4 +11,5 @@ import java.util.List;
 public interface OrderDetailDaoJpaRepository extends JpaRepository< OrderDetail,Integer> {
     List<OrderDetail> findByUser(UserInfo currentUser);
 
+    List<OrderDetail> findByOrderStatus(String status);
 }

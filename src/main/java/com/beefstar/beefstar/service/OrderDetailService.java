@@ -9,14 +9,19 @@ import com.beefstar.beefstar.infrastructure.entity.OrderDetail;
 import com.beefstar.beefstar.infrastructure.entity.Product;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@CacheConfig(cacheNames = "orders")
 public class OrderDetailService {
     private final static String ORDER_PLACED = "Placed";
     @Autowired
@@ -30,7 +35,8 @@ public class OrderDetailService {
     @Autowired
     private CartService cartService;
 
-
+    @Transactional
+    @CacheEvict(value = "orders", allEntries = true)
     public OrderDetail placeOrder(OrderInput orderInput, boolean isSingleProductCheckout) {
         List<OrderProductQuantity> productQuantityList = orderInput.orderProductQuantityList();
         OrderDetail orderDetailReturned = null;
@@ -64,18 +70,26 @@ public class OrderDetailService {
         }
         return orderDetailReturned;
     }
-
+    @Cacheable("orders")
     public List<OrderDetail> getOrderDetails() {
+        System.err.println("wywołuje pobieranie");
         String currentUser = JwtRequestFilter.CURRENT_USER;
         UserInfo user = userService.findUserById(currentUser);
         return orderDetailDao.findOrdersByUser(user);
 
     }
 
-    public List<OrderDetail> getAllOrdersDetails() {
-        return orderDetailDao.findAllOrders();
+    @Cacheable("orders")
+    public List<OrderDetail> getAllOrdersDetails(String status) {
+        System.err.println("wywołuje pobieranie");
+        if(status.equalsIgnoreCase("all")){
+            return orderDetailDao.findAllOrders();
+        }else {
+            return orderDetailDao.findByOrderStatus(status);
+        }
     }
-
+    @Transactional
+    @CacheEvict(value = "orders", allEntries = true)
     public OrderDetail markAsDelivered(Integer orderId) {
         Optional<OrderDetail> orderDetailOptional = orderDetailDao.findOrderById(orderId);
         if (orderDetailOptional.isEmpty()) {
@@ -86,4 +100,5 @@ public class OrderDetailService {
             return orderDetailDao.saveOrder(orderDetail);
         }
     }
+
 }

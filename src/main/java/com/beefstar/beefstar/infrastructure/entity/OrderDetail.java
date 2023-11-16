@@ -22,7 +22,7 @@ public class OrderDetail {
     private String orderStatus;
     private BigDecimal orderAmount;
     private OffsetDateTime orderDate;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private Product product;
     @OneToOne
     private UserInfo user;

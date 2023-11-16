@@ -22,12 +22,13 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-cache'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
 	implementation 'io.jsonwebtoken:jjwt:0.9.1'
-
+	implementation 'net.sf.ehcache:ehcache'
 	compileOnly 'org.projectlombok:lombok'
 
 	runtimeOnly 'org.postgresql:postgresql'
@@ -35,11 +36,24 @@ dependencies {
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 	annotationProcessor 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
-
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.slf4j:slf4j-api:2.0.5'
+
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'junit:junit:4.13.1'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	implementation 'io.rest-assured:xml-path:5.3.0'
+	testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.3'
 }
 
+
+
+dependencyManagement {
+	imports {
+		mavenBom 'org.testcontainers:testcontainers-bom:1.17.6'
+	}
+}
 tasks.named('test') {
 	useJUnitPlatform()
 }

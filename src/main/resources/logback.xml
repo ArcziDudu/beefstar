@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Import podstawowej konfiguracji Spring Boot -->
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!-- Wyłącz logowanie dla innych klas Hibernate -->
+    <logger name="org.hibernate" level="OFF"/>
+
+    <!-- Włącz logowanie tylko dla zapytań SQL -->
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+
+    <!-- Konfiguracja dołączanych appenderów, np. ConsoleAppender -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%highlight(%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n%throwable){DEFAULT}%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Root logger z ustawionym appenderem -->
+    <root level="info">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>

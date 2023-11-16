@@ -14,4 +14,6 @@ public interface OrderDetailDao {
     List<OrderDetail> findAllOrders();
 
     Optional<OrderDetail> findOrderById(Integer orderId);
+
+    List<OrderDetail> findByOrderStatus(String status);
 }

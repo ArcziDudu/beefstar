@@ -33,4 +33,9 @@ public class OrderDetailJpaImpl implements OrderDetailDao {
     public Optional<OrderDetail> findOrderById(Integer orderId) {
         return orderDetailDaoJpaRepository.findById(orderId);
     }
+
+    @Override
+    public List<OrderDetail> findByOrderStatus(String status) {
+        return orderDetailDaoJpaRepository.findByOrderStatus(status);
+    }
 }

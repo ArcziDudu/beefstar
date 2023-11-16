@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private NewUserMapper newUserMapper;
-
+    @Transactional
     public UserInfo registerNewUser(UserInfoDTO newUser) {
         RoleDTO role = roleDao.findById("User").orElseThrow(()->new UsernameNotFoundException("role not found"));;
         return userInfoDao.save(UserInfoDTO.builder()

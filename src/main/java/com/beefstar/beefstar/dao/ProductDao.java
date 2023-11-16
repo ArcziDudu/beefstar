@@ -11,10 +11,9 @@ import java.util.Optional;
 public interface ProductDao {
     Product save(ProductDTO productDTO);
 
-    List<Product> fetchAllProducts();
-    Page<Product> fetchAllProducts(Pageable pageable);
-    Page<Product> findByProductName(String key1, String key2, Pageable pageable);
+    Page<Product> findByProductName(String key1, String key2, String key3, Pageable pageable);
     void deleteProductDetailsById(Integer productId);
-
    Optional<Product> fetchProductDetailsById(Integer productId);
+
+    Page<Product> fetchAllProducts(Pageable pageable);
 }
