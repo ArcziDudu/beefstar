@@ -3,20 +3,20 @@ package com.beefstar.beefstar.service;
 import com.beefstar.beefstar.domain.ImageModelDto;
 import com.beefstar.beefstar.infrastructure.entity.ImageModel;
 import com.beefstar.beefstar.infrastructure.mapper.ImageModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class ImageService {
-    @Autowired
-    private ImageModelMapper imageModelMapper;
+
+    private final ImageModelMapper imageModelMapper;
 
     public Set<ImageModel> uploadImage(MultipartFile[] multipartFiles) throws IOException {
         Set<ImageModelDto> imageModels = new HashSet<>();

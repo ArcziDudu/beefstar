@@ -4,16 +4,18 @@ import com.beefstar.beefstar.dao.OrderDetailDao;
 import com.beefstar.beefstar.infrastructure.entity.OrderDetail;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
 import com.beefstar.beefstar.infrastructure.jpaRepository.OrderDetailDaoJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class OrderDetailJpaImpl implements OrderDetailDao {
-    @Autowired
-    private OrderDetailDaoJpaRepository orderDetailDaoJpaRepository;
+
+    private final OrderDetailDaoJpaRepository orderDetailDaoJpaRepository;
+
     @Override
     public OrderDetail saveOrder(OrderDetail orderDetail) {
         return orderDetailDaoJpaRepository.save(orderDetail);

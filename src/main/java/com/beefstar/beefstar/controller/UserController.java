@@ -3,8 +3,8 @@ package com.beefstar.beefstar.controller;
 import com.beefstar.beefstar.domain.UserInfoDTO;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
 import com.beefstar.beefstar.service.UserService;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.annotation.PostConstruct;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,16 +12,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
-
 
 @RestController
+@RequiredArgsConstructor
 public class UserController {
     public static final String REGISTER = "/register";
     public static final String FOR_ADMIN = "/for-admin";
     public static final String FOR_USER = "/for-user";
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
 
     @PostConstruct
     public void initData() {

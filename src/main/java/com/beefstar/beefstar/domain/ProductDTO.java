@@ -1,7 +1,7 @@
 package com.beefstar.beefstar.domain;
 
 import com.beefstar.beefstar.infrastructure.entity.ImageModel;
-import lombok.*;
+import lombok.With;
 
 import java.math.BigDecimal;
 import java.util.Set;

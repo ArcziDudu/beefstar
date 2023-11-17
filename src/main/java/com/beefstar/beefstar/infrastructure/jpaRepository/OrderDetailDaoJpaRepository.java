@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface OrderDetailDaoJpaRepository extends JpaRepository< OrderDetail,Integer> {
+public interface OrderDetailDaoJpaRepository extends JpaRepository<OrderDetail, Integer> {
     List<OrderDetail> findByUser(UserInfo currentUser);
 
     List<OrderDetail> findByOrderStatus(String status);

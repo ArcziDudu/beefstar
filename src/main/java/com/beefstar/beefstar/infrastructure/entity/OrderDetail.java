@@ -1,8 +1,8 @@
 package com.beefstar.beefstar.infrastructure.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
@@ -18,7 +18,7 @@ public class OrderDetail {
     private Integer orderId;
     private String orderFullName;
     private String orderFullAddress;
-    private String  orderContactNumber;
+    private String orderContactNumber;
     private String orderStatus;
     private BigDecimal orderAmount;
     private OffsetDateTime orderDate;

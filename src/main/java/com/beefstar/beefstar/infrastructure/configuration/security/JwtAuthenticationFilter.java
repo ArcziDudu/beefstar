@@ -1,34 +1,34 @@
 package com.beefstar.beefstar.infrastructure.configuration.security;
 
-import com.beefstar.beefstar.infrastructure.util.JwtUtil;
-import com.beefstar.beefstar.service.JwtService;
-import io.jsonwebtoken.ExpiredJwtException;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import io.jsonwebtoken.ExpiredJwtException;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+@RequiredArgsConstructor
+public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     public static String CURRENT_USER = "";
 
-    @Autowired
-    private JwtUtil jwtUtil;
+    private final JwtHelper jwtHelper;
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtService jwtService;
+
+    private final UserDetailsService userDetailsService;
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -36,15 +36,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         final String requestTokenHeader = request.getHeader("Authorization");
 
         String username = null;
-        String jwtToken = null;
+        String token = null;
 
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            jwtToken = requestTokenHeader.substring(7);
+            token = requestTokenHeader.substring(7);
             try {
-                username = jwtUtil.getUsernameFromToken(jwtToken);
+                username = jwtHelper.getUsernameFromToken(token);
                 CURRENT_USER = username;
             } catch (IllegalArgumentException e) {
-                System.out.println("Unable to get JWT Token");
+                System.out.println("Unable to get JWT Token" + e);
             } catch (ExpiredJwtException e) {
                 System.out.println("JWT Token has expired");
             }
@@ -53,10 +53,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
-            UserDetails userDetails = jwtService.loadUserByUsername(username);
-
-            if (jwtUtil.validateToken(jwtToken, userDetails)) {
+            if (jwtHelper.validateToken(token, userDetails)) {
 
                 UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
@@ -66,5 +65,6 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         filterChain.doFilter(request, response);
 
     }
+
 
 }

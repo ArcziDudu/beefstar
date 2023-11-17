@@ -5,29 +5,29 @@ import com.beefstar.beefstar.dao.UserInfoDao;
 import com.beefstar.beefstar.domain.RoleDTO;
 import com.beefstar.beefstar.domain.UserInfoDTO;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
-import com.beefstar.beefstar.infrastructure.mapper.NewUserMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.Optional;
 import java.util.Set;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
-    @Autowired
-    private UserInfoDao userInfoDao;
-    @Autowired
-    private RoleDao roleDao;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private NewUserMapper newUserMapper;
+
+    private final UserInfoDao userInfoDao;
+
+    private final RoleDao roleDao;
+
+    private final PasswordEncoder passwordEncoder;
+
     @Transactional
     public UserInfo registerNewUser(UserInfoDTO newUser) {
-        RoleDTO role = roleDao.findById("User").orElseThrow(()->new UsernameNotFoundException("role not found"));;
+        RoleDTO role = roleDao.findById("User").orElseThrow(() -> new UsernameNotFoundException("role not found"));
+        ;
         return userInfoDao.save(UserInfoDTO.builder()
                 .userName(newUser.userName())
                 .userFirstName(newUser.userFirstName())
@@ -70,10 +70,10 @@ public class UserService {
         userInfoDao.save(user);
     }
 
-    public UserInfo findUserById(String userId){
+    public UserInfo findUserById(String userId) {
         Optional<UserInfo> byId = userInfoDao.findById(userId);
-        if(byId.isEmpty()){
-            throw  new RuntimeException();
+        if (byId.isEmpty()) {
+            throw new RuntimeException();
         }
         return byId.get();
     }

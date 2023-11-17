@@ -1,13 +1,14 @@
 package com.beefstar.beefstar.infrastructure.configuration.cache;
 
-import org.springframework.cache.CacheManager;
 
-import org.springframework.cache.ehcache.EhCacheCacheManager;
-import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
+import com.github.benmanes.caffeine.cache.Caffeine;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.core.io.ClassPathResource;
+
+import java.util.concurrent.TimeUnit;
 
 
 @Configuration
@@ -16,14 +17,15 @@ public class CacheConfig {
 
     @Bean
     public CacheManager cacheManager() {
-        return new EhCacheCacheManager(ehCacheCacheManager().getObject());
+        CaffeineCacheManager cacheManager = new CaffeineCacheManager();
+        cacheManager.setCaffeine(caffeineCacheBuilder());
+        return (CacheManager) cacheManager;
     }
 
-    @Bean
-    public EhCacheManagerFactoryBean ehCacheCacheManager() {
-        EhCacheManagerFactoryBean cmfb = new EhCacheManagerFactoryBean();
-        cmfb.setConfigLocation(new ClassPathResource("ehcache.xml"));
-        cmfb.setShared(true);
-        return cmfb;
+    Caffeine<Object, Object> caffeineCacheBuilder() {
+        return Caffeine.newBuilder()
+                .initialCapacity(100)
+                .maximumSize(500)
+                .expireAfterAccess(60, TimeUnit.MINUTES);
     }
 }

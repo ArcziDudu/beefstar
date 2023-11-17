@@ -5,21 +5,21 @@ import com.beefstar.beefstar.domain.ProductDTO;
 import com.beefstar.beefstar.infrastructure.entity.Product;
 import com.beefstar.beefstar.infrastructure.jpaRepository.ProductJpaRepository;
 import com.beefstar.beefstar.infrastructure.mapper.ProductMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class ProductJpaImpl implements ProductDao {
-    @Autowired
-    private ProductJpaRepository productJpaRepository;
 
-    @Autowired
-    private ProductMapper productMapper;
+    private final ProductJpaRepository productJpaRepository;
+
+
+    private final ProductMapper productMapper;
 
     @Override
     public Product save(ProductDTO product) {
@@ -33,10 +33,10 @@ public class ProductJpaImpl implements ProductDao {
     }
 
     @Override
-    public Page<Product> findByProductName(String key1, String key2,String key3, Pageable pageable) {
+    public Page<Product> findByProductName(String key1, String key2, String key3, Pageable pageable) {
         return productJpaRepository
                 .findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCaseOrCategoryContainingIgnoreCase(
-                key1,key2,key3,pageable);
+                        key1, key2, key3, pageable);
     }
 
     @Override

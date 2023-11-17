@@ -5,7 +5,7 @@ import com.beefstar.beefstar.infrastructure.entity.ImageModel;
 import com.beefstar.beefstar.infrastructure.entity.Product;
 import com.beefstar.beefstar.service.ImageService;
 import com.beefstar.beefstar.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +17,12 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private ProductService productService;
-    @Autowired
-    private ImageService imageService;
+    private final ProductService productService;
+
+    private final ImageService imageService;
     public static final String ADD_PRODUCT = "/product/add";
     public static final String ALL_PRODUCT = "/product/all";
     public static final String ONE_PRODUCT_BY_ID = "/product/details/{productId}";

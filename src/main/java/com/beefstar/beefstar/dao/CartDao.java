@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface CartDao {
     Cart save(Cart cart);
+
     List<Cart> findCartByUser(UserInfo userInfo);
 
     void deleteCart(Cart c);

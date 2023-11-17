@@ -1,24 +1,34 @@
 package com.beefstar.beefstar.controller;
 
 
+import com.beefstar.beefstar.infrastructure.configuration.security.JwtHelper;
+import com.beefstar.beefstar.infrastructure.configuration.security.JwtService;
 import com.beefstar.beefstar.infrastructure.configuration.security.model.JwtRequest;
 import com.beefstar.beefstar.infrastructure.configuration.security.model.JwtResponse;
-import com.beefstar.beefstar.service.JwtService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
+@RequiredArgsConstructor
 public class JwtController {
+    private final UserDetailsService userDetailsService;
 
-    @Autowired
-    private JwtService jwtService;
+    private final JwtHelper helper;
 
-    @PostMapping({"/authenticate"})
-    public JwtResponse createJwtToken(@RequestBody JwtRequest jwtRequest) throws Exception {
-        return jwtService.createJwtToken(jwtRequest);
+    private final JwtService jwtService;
+
+    @PostMapping({"/auth"})
+    public ResponseEntity<JwtResponse> createJwtToken(@RequestBody JwtRequest request) throws Exception {
+        return ResponseEntity.ok(jwtService.createJwtToken(request));
+
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public String exceptionHandler() {
+        return "Credentials Invalid !!";
     }
 }

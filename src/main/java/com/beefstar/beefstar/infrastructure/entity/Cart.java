@@ -1,8 +1,7 @@
 package com.beefstar.beefstar.infrastructure.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
-
-import javax.persistence.*;
 
 @Entity
 @Table
@@ -16,7 +15,7 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer cartId;
     @OneToOne
-    private  Product product;
+    private Product product;
     @OneToOne(fetch = FetchType.LAZY)
     private UserInfo userInfo;
 

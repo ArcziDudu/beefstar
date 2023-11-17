@@ -1,33 +1,31 @@
 package com.beefstar.beefstar.service;
 
 import com.beefstar.beefstar.dao.CartDao;
-import com.beefstar.beefstar.infrastructure.configuration.security.JwtRequestFilter;
+import com.beefstar.beefstar.infrastructure.configuration.security.JwtAuthenticationFilter;
 import com.beefstar.beefstar.infrastructure.entity.Cart;
 import com.beefstar.beefstar.infrastructure.entity.Product;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Objects;
 
 @Service
+@RequiredArgsConstructor
 public class CartService {
-    @Autowired
-    private CartDao cartDao;
-    @Autowired
-    private ProductService productService;
+    private final CartDao cartDao;
+    private final ProductService productService;
+    private final UserService userService;
 
-    @Autowired
-    private UserService userService;
     @Transactional
-    public Cart addToCart(Integer productId){
+    public Cart addToCart(Integer productId) {
         Product product = productService.fetchProductDetails(productId);
-        String username = JwtRequestFilter.CURRENT_USER;
+        String username = JwtAuthenticationFilter.CURRENT_USER;
         UserInfo user = null;
-        if(username!=null){
-           user = userService.findUserById(username);
+        if (username != null) {
+            user = userService.findUserById(username);
         }
         List<Cart> cartByUser = cartDao.findCartByUser(user);
 
@@ -35,10 +33,10 @@ public class CartService {
                 .filter(c -> Objects.equals(c.getProduct().getProductId(), productId))
                 .toList();
 
-        if(!filteredList.isEmpty()){
+        if (!filteredList.isEmpty()) {
             return null;
         }
-        if(product != null && user != null){
+        if (product != null && user != null) {
             Cart cart = Cart.builder()
                     .userInfo(user)
                     .product(product)
@@ -48,20 +46,21 @@ public class CartService {
         return null;
     }
 
-    public List<Cart> getCartDetails(){
-        UserInfo user = userService.findUserById(JwtRequestFilter.CURRENT_USER);
+    public List<Cart> getCartDetails() {
+        UserInfo user = userService.findUserById(JwtAuthenticationFilter.CURRENT_USER);
         return cartDao.findCartByUser(user);
     }
 
     public List<Cart> findByUser() {
-        UserInfo user = userService.findUserById(JwtRequestFilter.CURRENT_USER);
+        UserInfo user = userService.findUserById(JwtAuthenticationFilter.CURRENT_USER);
         return cartDao.findCartByUser(user);
     }
 
     @Transactional
     public void deleteCart(Cart c) {
-         cartDao.deleteCart(c);
+        cartDao.deleteCart(c);
     }
+
     @Transactional
     public void deleteCart(Integer cartId) {
         cartDao.deleteCartById(cartId);

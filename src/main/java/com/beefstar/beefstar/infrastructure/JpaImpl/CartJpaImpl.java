@@ -4,17 +4,17 @@ import com.beefstar.beefstar.dao.CartDao;
 import com.beefstar.beefstar.infrastructure.entity.Cart;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
 import com.beefstar.beefstar.infrastructure.jpaRepository.CartJpaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class CartJpaImpl implements CartDao {
 
-    @Autowired
-    private CartJpaRepository cartJpaRepository;
+
+    private final CartJpaRepository cartJpaRepository;
 
     @Override
     public Cart save(Cart cart) {
@@ -28,7 +28,7 @@ public class CartJpaImpl implements CartDao {
 
     @Override
     public void deleteCart(Cart c) {
-         cartJpaRepository.delete(c);
+        cartJpaRepository.delete(c);
     }
 
     @Override

@@ -5,16 +5,16 @@ import com.beefstar.beefstar.domain.UserInfoDTO;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
 import com.beefstar.beefstar.infrastructure.jpaRepository.NewUserJpaRepository;
 import com.beefstar.beefstar.infrastructure.mapper.NewUserMapper;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserInfoImpl implements UserInfoDao {
-    private NewUserJpaRepository newUserJpaRepository;
-    private NewUserMapper newUserMapper;
+    private final NewUserJpaRepository newUserJpaRepository;
+    private final NewUserMapper newUserMapper;
 
 
     @Override

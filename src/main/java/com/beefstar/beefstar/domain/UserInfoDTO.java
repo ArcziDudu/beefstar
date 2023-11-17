@@ -1,8 +1,6 @@
 package com.beefstar.beefstar.domain;
 
 import lombok.Builder;
-import lombok.Data;
-import lombok.Setter;
 
 import java.util.Set;
 
