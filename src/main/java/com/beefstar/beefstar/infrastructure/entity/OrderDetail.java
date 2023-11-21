@@ -24,7 +24,7 @@ public class OrderDetail {
     private OffsetDateTime orderDate;
     @OneToOne(cascade = CascadeType.MERGE)
     private Product product;
-    @OneToOne
+    @ManyToOne
     private UserInfo user;
 
 

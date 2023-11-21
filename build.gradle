@@ -28,17 +28,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.mapstruct:mapstruct:1.5.3.Final'
-// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
-// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
+
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
-// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
 	compileOnly 'org.projectlombok:lombok'
 	implementation 'com.github.ben-manes.caffeine:caffeine:3.0.4'
 	runtimeOnly 'org.postgresql:postgresql'
-	implementation 'javax.xml.bind:jaxb-api:2.3.1' // lub najnowsza dostępna wersja
+	implementation 'javax.xml.bind:jaxb-api:2.3.1'
 
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.3.Final'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -54,7 +52,12 @@ dependencies {
 	testImplementation 'org.junit.vintage:junit-vintage-engine:5.9.3'
 }
 
-
+bootJar {
+	archiveFileName = "beefstar.${archiveExtension.get()}"
+}
+jar {
+	enabled = false
+}
 
 dependencyManagement {
 	imports {

@@ -19,8 +19,8 @@ public class Product {
     private String productName;
     @Column(length = 250)
     private String productDescription;
-    private BigDecimal productActualPrice;
-    private String category;
+    private String productActualPrice;
+    private String productCategory;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "product_images",
             joinColumns = {

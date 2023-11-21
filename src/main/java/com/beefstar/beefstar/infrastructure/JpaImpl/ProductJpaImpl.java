@@ -35,7 +35,7 @@ public class ProductJpaImpl implements ProductDao {
     @Override
     public Page<Product> findByProductName(String key1, String key2, String key3, Pageable pageable) {
         return productJpaRepository
-                .findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCaseOrCategoryContainingIgnoreCase(
+                .findByProductNameContainingIgnoreCaseOrProductDescriptionContainingIgnoreCaseOrProductCategoryContainingIgnoreCase(
                         key1, key2, key3, pageable);
     }
 

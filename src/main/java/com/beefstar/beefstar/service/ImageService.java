@@ -29,7 +29,7 @@ public class ImageService {
             imageModels.add(imageModel);
         }
         return imageModels.stream()
-                .map(image -> imageModelMapper.mapFromDto(image))
+                .map(imageModelMapper::mapFromDto)
                 .collect(Collectors.toSet());
     }
 }

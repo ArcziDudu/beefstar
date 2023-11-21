@@ -2,13 +2,14 @@ package com.beefstar.beefstar.infrastructure.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.checkerframework.common.aliasing.qual.Unique;
 
 @Entity
 @Table
 @Getter
 @Setter
 @Builder
-@NoArgsConstructor // Add this annotation
+@NoArgsConstructor
 @AllArgsConstructor
 public class Cart {
     @Id
@@ -16,7 +17,8 @@ public class Cart {
     private Integer cartId;
     @OneToOne
     private Product product;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne // Change to ManyToOne, assuming UserInfo is a separate entity
     private UserInfo userInfo;
+
 
 }

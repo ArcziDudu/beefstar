@@ -1,5 +1,6 @@
 package com.beefstar.beefstar.domain;
 
+import com.beefstar.beefstar.infrastructure.entity.Cart;
 import lombok.Builder;
 
 import java.util.Set;

@@ -19,7 +19,7 @@ public class CartService {
     private final ProductService productService;
     private final UserService userService;
 
-    @Transactional
+
     public Cart addToCart(Integer productId) {
         Product product = productService.fetchProductDetails(productId);
         String username = JwtAuthenticationFilter.CURRENT_USER;
@@ -33,14 +33,17 @@ public class CartService {
                 .filter(c -> Objects.equals(c.getProduct().getProductId(), productId))
                 .toList();
 
+
         if (!filteredList.isEmpty()) {
             return null;
         }
+
         if (product != null && user != null) {
             Cart cart = Cart.builder()
-                    .userInfo(user)
                     .product(product)
+                    .userInfo(user)
                     .build();
+
             return cartDao.save(cart);
         }
         return null;
