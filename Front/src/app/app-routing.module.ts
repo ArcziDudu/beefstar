@@ -19,6 +19,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 
 const routes: Routes = [
+ { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] } },
   { path: 'user', component: UserComponent, canActivate: [AuthGuard], data: { roles: ['User'] } },
@@ -39,7 +40,7 @@ const routes: Routes = [
   },
   {
     path: 'admin/product-details', component: OrderDetailsComponent, canActivate: [AuthGuard], data: { roles: ['Admin'] },
- 
+
   },
   { path: 'product/all/details', component: ShowProductDetailsComponent },
   {
@@ -59,7 +60,7 @@ const routes: Routes = [
     path: 'order/confirm',
     component: OrderConfirmationComponent,
     canActivate: [AuthGuard], data: { roles: ['User'] },
-  }, 
+  },
   {
 
     path: 'account/my-orders',

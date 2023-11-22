@@ -1,4 +1,4 @@
-version: '3.1'
+version: '3'
 services:
   backend:
     build: .
@@ -6,15 +6,14 @@ services:
       - 8080:8080
     environment:
       - SPRING_PROFILES_ACTIVE=local
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://PostgreSQL:5432/beefstar
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/beefstar
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=postgres
     networks:
       - spring-boot-postgres
     depends_on:
-      PostgreSQL:
-        condition: service_healthy
-  PostgreSQL:
+      - postgresql
+  postgresql:
     image: postgres:15.0
     ports:
       - 5432:5432
@@ -25,15 +24,21 @@ services:
       - DOCKER_ENV=true
     volumes:
       - db-data:/var/lib/postgresql/data
-      - /home/arczi/IdeaProjects/beefstar/src/main/resources/productImages:/app/src/main/resources/productImages
     networks:
       - spring-boot-postgres
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
-volumes:
-  db-data:
+  angular-app:
+    build:
+      context: ./Front
+    ports:
+      - "4200:4200"
+    depends_on:
+      - backend
 networks:
   spring-boot-postgres:
+volumes:
+  db-data:
