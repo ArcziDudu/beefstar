@@ -21,7 +21,7 @@ export class AddNewProductComponent implements OnInit{
     productId: null,
     productName: "",
     productDescription: "",
-    productDiscountedPrice: 0,
+    productCategory: "",
     productActualPrice:0,
     productImages: []
   }

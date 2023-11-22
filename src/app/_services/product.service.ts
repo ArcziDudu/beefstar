@@ -23,7 +23,6 @@ export class ProductService {
   public getAllProducts(pageNumber, searchKey: string = ""){
     return this.httpClient.get<Product[]>("http://localhost:8080/beefstar/product/all?pageNumber="+pageNumber+"&searchKey="+searchKey);
   }
-
   public getProductDetailsById(productId){
     return this.httpClient.get<Product>("http://localhost:8080/beefstar/product/details/"+productId);
   }
@@ -42,6 +41,7 @@ export class ProductService {
 
   public addToCart(productId: number) {
     const url = `http://localhost:8080/beefstar/addToCart/${productId}`;
+    
     return this.httpClient.post(url, null);
   }
   
@@ -56,8 +56,8 @@ export class ProductService {
     return this.httpClient.get<MyOrderDetails[]>("http://localhost:8080/beefstar/order/details")
   }
   
-  public getAllOrdersDetailsForAdmin(): Observable<MyOrderDetails[]>{
-    return this.httpClient.get<MyOrderDetails[]>("http://localhost:8080/beefstar/order/details/all")
+  public getAllOrdersDetailsForAdmin(status: string): Observable<MyOrderDetails[]>{
+    return this.httpClient.get<MyOrderDetails[]>("http://localhost:8080/beefstar/order/details/all/"+status)
   }
 
 }

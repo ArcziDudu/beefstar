@@ -20,16 +20,19 @@ export class ShowProductDetailsComponent implements OnInit{
   pageNumber: number = 0;
   productDetails:  Product[] = [];
   displayedColumns: string[] = ['Id','Product Name', 'description', 'Product Discounted Price','Product Actual Price','Actions'];
-  
+  category: string = 'All';
   constructor(
     private productService: ProductService,
     public imagesDialog: MatDialog,
     private imageProcessingService: ImageProcessingService,
     private router: Router
     ){}
+
+
   ngOnInit():void{
     this.getAllProducts();
   }
+
   searchByKeyword(searchkeyword){
     this.pageNumber = 0;
     this.productDetails  = [];
@@ -59,16 +62,6 @@ export class ShowProductDetailsComponent implements OnInit{
     );
   }
 
-  deleteProduct(productId){
-    this.productService.deleteProduct(productId).subscribe(
-      (resp)=>{
-       this.getAllProducts();
-      },
-      (error:HttpErrorResponse)=>{
-        console.log(error);
-      }
-    )
-  }
 
   showImages(product: Product){
    this.imagesDialog.open(ShowProductImagesDialogComponent,{

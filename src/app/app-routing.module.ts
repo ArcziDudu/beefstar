@@ -16,7 +16,6 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { MyAccountComponent } from './my-account/my-account.component';
 import { OrderDetailsComponent } from './order-details/order-details.component';
 
 const routes: Routes = [
@@ -62,10 +61,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], data: { roles: ['User'] },
   }, 
   {
-    path: 'account',
-    component: MyAccountComponent,
-    canActivate: [AuthGuard], data: { roles: ['User'] },
-  }, {
+
     path: 'account/my-orders',
     component: MyOrdersComponent,
     canActivate: [AuthGuard], data: { roles: ['User'] },

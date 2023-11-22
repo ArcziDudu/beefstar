@@ -52,9 +52,9 @@ export class BuyProductComponent implements OnInit{
       }
     }
     
-    isFieldEmpty(fieldName: string): boolean {
-      return !this.orderDetails[fieldName].trim(); 
-    }
+    isAnyFieldEmpty(): boolean {
+      return !this.orderDetails.userFullName.trim() || !this.orderDetails.userFullAddress.trim() || !this.orderDetails.userContactNumber.trim();
+  }
 
   placeOrder(orderForm: NgForm){
     this.productService.placeOrder(this.orderDetails, this.isSingleProductCheckout).subscribe(

@@ -4,21 +4,19 @@
 <div class="container mt-5">
 
       <mat-form-field appearance="outline" class="w-50 container" >
-         <mat-label>Search any product</mat-label>
+         <mat-label>Search any product by name, category or description</mat-label>
         
             <input
             matInput 
             #searchkeyword
             (keyup)="searchByKeyword(searchkeyword.value)"
+
             name="searchKey"
             id="searchKey"
-            placeholder="Search any product">
-    
+            placeholder="Search any product ">
       
      </mat-form-field>
 
-     
-  
 
    
     <mat-grid-list cols="3" rowHeight="1:1" gutterSize="30" >
@@ -37,13 +35,13 @@
          </div>
          
          <div class="mt-2" style="text-align: center;">
-            <button type="button" mat-raised-button  color="warn" (click)="showProductDetails(p.productId)">Szczegóły</button>
+            <button type="button" mat-raised-button  color="warn" (click)="showProductDetails(p.productId)" style=" background-color: #7a3a0b !important ;">Details</button>
          </div>
         </div>
     </mat-grid-tile>
   </mat-grid-list>
   <div class="text-center mt-5" style="padding-bottom: 100px;" *ngIf="showLoadButton">
-   <button type="button" mat-raised-button color="primary" (click)="loadMoreProducts()">Load more</button>
+   <button type="button" mat-raised-button color="primary" (click)="loadMoreProducts('all')" style=" background-color: #7a3a0b !important ;">Load more</button>
   </div>
   <div class="mt-5">
    

@@ -33,8 +33,10 @@ import { OrderConfirmationComponent } from './order-confirmation/order-confirmat
 import { RegisterComponent } from './register/register.component';
 import { CartComponent } from './cart/cart.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
-import { MyAccountComponent } from './my-account/my-account.component';
+
 import { OrderDetailsComponent } from './order-details/order-details.component';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { FooterComponent } from './footer/footer.component'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +45,7 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     UserComponent,
     LoginComponent,
     HeaderComponent,
+    FooterComponent,
     FobiddenComponent,
     AddNewProductComponent,
     DragDirective,
@@ -54,8 +57,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     RegisterComponent,
     CartComponent,
     MyOrdersComponent,
-    MyAccountComponent,
-    OrderDetailsComponent
+    OrderDetailsComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,8 @@ import { OrderDetailsComponent } from './order-details/order-details.component';
     MatGridListModule,
     MatTableModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonToggleModule
   ],
   providers: [
     AuthGuard,

@@ -21,7 +21,7 @@
                       </mat-form-field>
 
                       <div align="right">
-                        <button type="submit" mat-stroked-button color="primary" [disabled]="isFieldEmpty('userFullName')">Place order</button>
+                        <button type="submit" mat-stroked-button color="primary" [disabled]="isAnyFieldEmpty()">Place order</button>
                       </div>
                 </form>
             </div>

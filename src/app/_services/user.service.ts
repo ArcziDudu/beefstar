@@ -20,7 +20,7 @@ export class UserService {
     }
 
   public login(loginData){
-    return this.httpclient.post(this.PATH_OF_API + "/authenticate", loginData, { headers: this.requestHeader})
+    return this.httpclient.post(this.PATH_OF_API + "/auth", loginData, { headers: this.requestHeader})
   }
 
   public forUser(){

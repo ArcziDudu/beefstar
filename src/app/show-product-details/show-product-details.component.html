@@ -49,9 +49,6 @@
         <button mat-icon-button color="primary" (click)="editProductDetails(element.productId)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" (click)="deleteProduct(element.productId)">
-          <mat-icon>delete</mat-icon>
-        </button>
        </td>
       </ng-container>
 
@@ -61,7 +58,7 @@
 </div>
 
   <div class="text-center p-5" *ngIf="showLoadMoreProductButton">
-    <button type="button" mat-raised-button color="primary" (click)="loadMoreProducts()">Load more</button>
+    <button type="button" mat-raised-button color="primary" (click)="loadMoreProducts()" style="background-color: #7a3a0b !important ;">Load more</button>
   </div>
 </div>
 
