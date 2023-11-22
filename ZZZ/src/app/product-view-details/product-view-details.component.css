@@ -1,0 +1,21 @@
+.product-information{
+    height: 500px;
+    font-size: medium;
+}
+
+.image-container{
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    
+}
+.product-zoom-image{
+    max-width: 90%;
+    max-height: 90%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}

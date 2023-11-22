@@ -1,0 +1,26 @@
+<mat-toolbar style="background-color: #320e0e;">
+  <span style="color: white;">
+    Beefstar
+  </span>
+
+  <span class="space-buttons"></span>
+  <button *ngIf="! isLoggedIn()" routerLink="/login" mat-raised-button color="primary" style="background-color: #7a3a0b !important ;">Login</button>
+
+ 
+</mat-toolbar>
+
+<div class="w-50" style="position: fixed;z-index: 999; top: 0; left: 25%;">
+  <mat-toolbar  *ngIf="isLoggedIn()" style="border-radius: 15px; background-color: #4e0b1d;">
+    <div class="container" style="display: flex;justify-content: space-between;">
+      <button class="header-buttons" mat-raised-button routerLink="/home" >Home</button>
+      <button class="header-buttons" *ngIf="isUser()" mat-raised-button  routerLink="/account/my-orders">My account</button>
+      <button class="header-buttons" *ngIf="isUser()" mat-raised-button  routerLink="/cart" >Cart</button>
+      <button class="header-buttons" *ngIf="! isUser()" mat-raised-button  routerLink="/product/add" >Add new product</button>
+      <button class="header-buttons" *ngIf="! isUser()" mat-raised-button routerLink="product/all/details" >Show Product Details</button>
+      <button class="header-buttons" *ngIf="! isUser()" mat-raised-button c routerLink="admin/product-details" >Order information</button>
+      <button class="header-buttons" *ngIf="isLoggedIn()" (click)="logout()" mat-raised-button >Logout</button>
+    </div>
+  </mat-toolbar>
+</div>
+
+

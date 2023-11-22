@@ -1,0 +1,66 @@
+<div class="mt-5" style="width: 90%; margin: 0 auto;">
+
+  <div class="container mt-5" >
+    <mat-form-field appearance="outline" class="w-50 container">
+       <mat-label>Search any product</mat-label>
+       <input
+       matInput 
+       #searchkeyword
+       (keyup)="searchByKeyword(searchkeyword.value)"
+       name="searchKey"
+       id="searchKey"
+       placeholder="Search any product">
+   </mat-form-field>
+
+  <div *ngIf="showTable">
+  <table mat-table [dataSource]="productDetails" class="mat-elevation-z8">
+    <ng-container matColumnDef="Id">
+      <th mat-header-cell *matHeaderCellDef > Product Id</th>
+      <td mat-cell *matCellDef="let element"> {{element.productId}} </td>
+    </ng-container>
+  
+
+    <ng-container matColumnDef="Product Name">
+      <th mat-header-cell *matHeaderCellDef> Product name</th>
+      <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef > Product description (max 250 words)</th>
+        <td mat-cell *matCellDef="let element" > {{element.productDescription}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="Product Discounted Price">
+      <th mat-header-cell *matHeaderCellDef> Product discounted price</th>
+      <td mat-cell *matCellDef="let element"> {{element.productDiscountedPrice}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Product Actual Price">
+        <th mat-header-cell *matHeaderCellDef> Product actual price</th>
+        <td mat-cell *matCellDef="let element"> {{element.productActualPrice}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef> Actions</th>
+        <td mat-cell *matCellDef="let element"> 
+        <button mat-icon-button color="primary" (click)="showImages(element)">
+          <mat-icon> images </mat-icon>
+        </button>
+        <button mat-icon-button color="primary" (click)="editProductDetails(element.productId)">
+          <mat-icon>edit</mat-icon>
+        </button>
+       </td>
+      </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+
+  <div class="text-center p-5" *ngIf="showLoadMoreProductButton">
+    <button type="button" mat-raised-button color="primary" (click)="loadMoreProducts()" style="background-color: #7a3a0b !important ;">Load more</button>
+  </div>
+</div>
+
+  
+  
