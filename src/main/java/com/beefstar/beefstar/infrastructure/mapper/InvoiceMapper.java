@@ -1,13 +1,14 @@
-package com.medinet.infrastructure.repository.mapper;
+package com.beefstar.beefstar.infrastructure.mapper;
 
-import com.medinet.api.dto.InvoiceDto;
-import com.medinet.infrastructure.entity.InvoiceEntity;
+import com.beefstar.beefstar.domain.InvoiceDTO;
+
+import com.beefstar.beefstar.infrastructure.entity.InvoiceEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface InvoiceMapper {
-    InvoiceDto mapFromEntity(InvoiceEntity entity);
+    InvoiceDTO mapFromEntity(InvoiceEntity entity);
 
-    InvoiceEntity mapFromDto(InvoiceDto patientDto);
+    InvoiceEntity mapFromDto(InvoiceDTO patientDto);
 }

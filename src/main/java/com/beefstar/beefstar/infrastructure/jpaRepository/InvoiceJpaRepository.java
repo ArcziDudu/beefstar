@@ -1,6 +1,6 @@
-package com.medinet.infrastructure.repository.jpa;
+package com.beefstar.beefstar.infrastructure.jpaRepository;
 
-import com.medinet.infrastructure.entity.InvoiceEntity;
+import com.beefstar.beefstar.infrastructure.entity.InvoiceEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

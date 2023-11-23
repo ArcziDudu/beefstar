@@ -1,10 +1,11 @@
-package com.medinet.infrastructure.repository;
+package com.beefstar.beefstar.infrastructure.JpaImpl;
 
-import com.medinet.api.dto.InvoiceDto;
-import com.medinet.business.dao.InvoiceDao;
-import com.medinet.infrastructure.entity.InvoiceEntity;
-import com.medinet.infrastructure.repository.jpa.InvoiceJpaRepository;
-import com.medinet.infrastructure.repository.mapper.InvoiceMapper;
+
+import com.beefstar.beefstar.dao.InvoiceDao;
+import com.beefstar.beefstar.domain.InvoiceDTO;
+import com.beefstar.beefstar.infrastructure.entity.InvoiceEntity;
+import com.beefstar.beefstar.infrastructure.jpaRepository.InvoiceJpaRepository;
+import com.beefstar.beefstar.infrastructure.mapper.InvoiceMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +18,7 @@ public class InvoiceRepository implements InvoiceDao {
     private InvoiceMapper invoiceMapper;
 
     @Override
-    public Optional<InvoiceDto> findByUuid(String uuid) {
+    public Optional<InvoiceDTO> findByUuid(String uuid) {
         return invoiceJpaRepository.findByUuid(uuid)
                 .map(invoiceMapper::mapFromEntity);
     }
@@ -26,4 +27,6 @@ public class InvoiceRepository implements InvoiceDao {
     public void save(InvoiceEntity pdfDocument) {
         invoiceJpaRepository.save(pdfDocument);
     }
+
+
 }
