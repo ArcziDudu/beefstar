@@ -9,7 +9,7 @@ import { MyOrderDetails } from '../_model/order.model';
 })
 export class MyOrdersComponent implements OnInit {
 
-  displayedColumns = ["Name","ProductName","Address", "Amount", "Date", "Status"];
+  displayedColumns = ["Name","ProductName","Address", "Amount", "Date", "Status", "Invoice"];
 
   myOrderDetails: MyOrderDetails[] = [];
   constructor(private productServicve: ProductService){
@@ -30,4 +30,5 @@ export class MyOrdersComponent implements OnInit {
       }
     );
   }
+
 }

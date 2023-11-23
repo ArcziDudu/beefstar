@@ -1,6 +1,7 @@
 package com.beefstar.beefstar.domain;
 
 import com.beefstar.beefstar.infrastructure.entity.ImageModel;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Builder;
 import lombok.With;
 

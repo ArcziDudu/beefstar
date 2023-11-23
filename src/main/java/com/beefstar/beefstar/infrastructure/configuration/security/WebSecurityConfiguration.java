@@ -35,10 +35,20 @@ public class WebSecurityConfiguration {
                 .and()
                 .authorizeRequests().
                 requestMatchers("/auth",
-                        "/product/**",
                         "/register",
                         "/product/all",
                         "/product/details/{productId}").permitAll()
+                .requestMatchers(
+                        "product/add/**",
+                        "/order/details/all/**",
+                        "/order/markAsDelivered/").hasAnyAuthority("ROLE_Admin")
+                .requestMatchers(
+                        "product/order/**",
+                        "/order/new/**",
+                        "/order/details",
+                        "/cartDetails",
+                        "/cartDelete/**",
+                        "/addToCart/**").hasAnyAuthority("ROLE_User")
                 .requestMatchers(HttpHeaders.ALLOW).permitAll()
                 .anyRequest()
                 .authenticated()

@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class UserController {
     public static final String REGISTER = "/register";
-    public static final String FOR_ADMIN = "/for-admin";
-    public static final String FOR_USER = "/for-user";
 
     private final UserService userService;
 
@@ -32,15 +30,4 @@ public class UserController {
         return ResponseEntity.ok(userService.registerNewUser(newUser));
     }
 
-    @GetMapping(FOR_ADMIN)
-    @PreAuthorize("hasRole('Admin')")
-    public ResponseEntity<String> forAdmin() {
-        return ResponseEntity.ok("This Url is only for Admin");
-    }
-
-    @GetMapping(FOR_USER)
-    @PreAuthorize("hasRole('User')")
-    public ResponseEntity<String> forUser() {
-        return ResponseEntity.ok("This Url is only for User");
-    }
 }

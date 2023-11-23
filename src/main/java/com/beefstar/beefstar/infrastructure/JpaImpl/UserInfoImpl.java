@@ -8,6 +8,7 @@ import com.beefstar.beefstar.infrastructure.mapper.NewUserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -25,5 +26,9 @@ public class UserInfoImpl implements UserInfoDao {
     @Override
     public Optional<UserInfo> findById(String username) {
         return newUserJpaRepository.findById(username);
+    }
+
+    public List<UserInfo> findAll() {
+        return newUserJpaRepository.findAll();
     }
 }

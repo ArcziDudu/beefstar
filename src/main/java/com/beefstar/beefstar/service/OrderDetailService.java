@@ -55,8 +55,7 @@ public class OrderDetailService {
                     .orderStatus(ORDER_PLACED)
                     .orderAmount(
                             new BigDecimal(product
-                                    .getProductActualPrice()
-                                    .toString())
+                                    .getProductActualPrice())
                                     .multiply(new BigDecimal(o.quantity()
                                             .toString())))
                     .product(product)
@@ -74,6 +73,7 @@ public class OrderDetailService {
     }
 
     @Cacheable("orders")
+    @CacheEvict(value = "orders", allEntries = true)
     public List<OrderDetail> getOrderDetails() {
         String currentUser = JwtAuthenticationFilter.CURRENT_USER;
         UserInfo user = userService.findUserById(currentUser);
@@ -83,11 +83,13 @@ public class OrderDetailService {
 
     @Cacheable("orders")
     public List<OrderDetail> getAllOrdersDetails(String status) {
-        if (status.equalsIgnoreCase("all")) {
-            return orderDetailDao.findAllOrders();
-        } else {
-            return orderDetailDao.findByOrderStatus(status);
-        }
+
+   if(status.equalsIgnoreCase("all")) {
+                    return orderDetailDao.findAllOrders();
+                } else {
+                    return orderDetailDao.findByOrderStatus(status);
+                }
+
     }
 
     @Transactional
@@ -99,6 +101,7 @@ public class OrderDetailService {
         } else {
             OrderDetail orderDetail = orderDetailOptional.get();
             orderDetail.setOrderStatus("Delivered");
+            orderDetail.setInvoiceAvailable(true);
             return orderDetailDao.saveOrder(orderDetail);
         }
     }

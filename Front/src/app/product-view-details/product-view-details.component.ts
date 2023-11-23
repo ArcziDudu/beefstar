@@ -3,6 +3,7 @@ import { Product } from '../_model/product_model';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { ProductService } from '../_services/product.service';
 
+
 @Component({
   selector: 'app-product-view-details',
   templateUrl: './product-view-details.component.html',
@@ -20,10 +21,10 @@ export class ProductViewDetailsComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    
+
     this.activatedRoute.data.subscribe(data => {
       this.product = data['product'];
-  
+
       if (!this.product) {
         console.error("Brak danych o produkcie");
       }

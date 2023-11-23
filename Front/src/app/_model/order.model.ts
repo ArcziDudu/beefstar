@@ -6,8 +6,9 @@ export interface MyOrderDetails{
     orderFullAddress: string,
     orderContactNumber: string,
     orderDate: Date;
-    orderStatus:string,
+    orderStatus:string
     orderAmount: number,
+    isInvoiceAvailable: boolean,
     user: any;
 
 }

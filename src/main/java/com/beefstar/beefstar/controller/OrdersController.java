@@ -19,7 +19,6 @@ public class OrdersController {
     private final String ORDER_STATUS = "/order/markAsDelivered/{orderId}";
     private final OrderDetailService orderDetailService;
 
-    @PreAuthorize("hasRole('User')")
     @PostMapping(NEW_ORDER)
     public ResponseEntity<OrderDetail> placeOrder(
             @PathVariable(name = "isSingleProductCheckout") boolean isSingleProductCheckout,
@@ -29,13 +28,13 @@ public class OrdersController {
         return ResponseEntity.ok(orderDetail);
     }
 
-    @PreAuthorize("hasRole('User')")
+
     @GetMapping(ORDER_DETAILS)
     public ResponseEntity<List<OrderDetail>> getOrderDetails() {
         return ResponseEntity.ok(orderDetailService.getOrderDetails());
     }
 
-    @PreAuthorize("hasRole('Admin')")
+
     @GetMapping(ALL_ORDER_DETAILS)
     public ResponseEntity<List<OrderDetail>> getAllOrderDetails(@PathVariable(name = "status") String status) {
         return ResponseEntity.ok(orderDetailService.getAllOrdersDetails(status));
