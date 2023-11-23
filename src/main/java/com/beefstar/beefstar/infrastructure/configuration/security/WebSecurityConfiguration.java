@@ -37,7 +37,7 @@ public class WebSecurityConfiguration {
                 requestMatchers("/auth",
                         "/register",
                         "/product/all",
-                        "/product/details/{productId}").permitAll()
+                        "/product/details/{productId}", "/invoice/download/**").permitAll()
                 .requestMatchers(
                         "product/add/**",
                         "/order/details/all/**",

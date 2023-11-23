@@ -17,7 +17,7 @@ public class Cart {
     private Integer cartId;
     @OneToOne
     private Product product;
-    @ManyToOne // Change to ManyToOne, assuming UserInfo is a separate entity
+    @ManyToOne
     private UserInfo userInfo;
 
 

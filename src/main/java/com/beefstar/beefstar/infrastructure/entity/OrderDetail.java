@@ -22,6 +22,7 @@ public class OrderDetail {
     private String orderStatus;
     private BigDecimal orderAmount;
     private OffsetDateTime orderDate;
+    private String uuid;
     private boolean isInvoiceAvailable;
     @ManyToOne
     @JoinColumn(name = "product_id")

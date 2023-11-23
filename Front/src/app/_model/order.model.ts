@@ -9,6 +9,7 @@ export interface MyOrderDetails{
     orderStatus:string
     orderAmount: number,
     isInvoiceAvailable: boolean,
+    uuid:string,
     user: any;
 
 }

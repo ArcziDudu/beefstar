@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../_services/product.service';
 import { MyOrderDetails } from '../_model/order.model';
 
+import { throwError } from 'rxjs';
+import * as saveAs from 'file-saver';
+import { HttpErrorResponse } from '@angular/common/http';
+
+
 @Component({
   selector: 'app-my-orders',
   templateUrl: './my-orders.component.html',
@@ -12,8 +17,9 @@ export class MyOrdersComponent implements OnInit {
   displayedColumns = ["Name","ProductName","Address", "Amount", "Date", "Status", "Invoice"];
 
   myOrderDetails: MyOrderDetails[] = [];
+  httpClient: any;
   constructor(private productServicve: ProductService){
-    
+
   }
   ngOnInit(): void {
    this.getOrderDetails();
@@ -31,4 +37,9 @@ export class MyOrdersComponent implements OnInit {
     );
   }
 
-}
+
+  public downloadInvoice(uuid: string): any {
+    this.productServicve.downloadInvoice(uuid);
+  }
+  }
+  
