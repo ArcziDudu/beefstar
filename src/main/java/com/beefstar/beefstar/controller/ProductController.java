@@ -28,8 +28,6 @@ public class ProductController {
     public static final String ONE_PRODUCT_BY_ID = "/product/details/{productId}";
     public static final String ONE_PRODUCT_BY_ID_CHECKOUT = "/product/order/{isSingleProductCheckout}/{productId}";
 
-
-    @PreAuthorize("hasRole('Admin')")
     @PostMapping(value = ADD_PRODUCT, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public ResponseEntity<Product> addNewProduct(@RequestPart("product") ProductDTO product,
                                                  @RequestPart("imageFile") MultipartFile[] file) {
@@ -56,7 +54,7 @@ public class ProductController {
         return ResponseEntity.ok(productService.fetchProductDetails(productId));
     }
 
-    @PreAuthorize("hasRole('User')")
+
     @GetMapping(ONE_PRODUCT_BY_ID_CHECKOUT)
     public ResponseEntity<List<Product>> getProductDetailsCheckout(
             @PathVariable(name = "isSingleProductCheckout") boolean isSingleProductCheckout,

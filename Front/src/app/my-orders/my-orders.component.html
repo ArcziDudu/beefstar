@@ -31,7 +31,13 @@
             <th mat-header-cell *matHeaderCellDef> Status</th>
             <td mat-cell *matCellDef="let element"> {{element.orderStatus}} </td>
         </ng-container>
-
+       
+        <ng-container matColumnDef="Invoice">
+            <th mat-header-cell *matHeaderCellDef> Invoice</th>
+             <td mat-cell *matCellDef="let element">
+                <button mat-raised-button style=" background-color: #7a3a0b !important;color: white !important;" 
+                *ngIf="element.invoiceAvailable"  (click)="downloadInvoice(element.uuid)">Invoice available</button></td>
+        </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>

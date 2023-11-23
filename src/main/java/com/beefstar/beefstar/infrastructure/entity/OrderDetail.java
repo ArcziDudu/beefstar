@@ -22,7 +22,10 @@ public class OrderDetail {
     private String orderStatus;
     private BigDecimal orderAmount;
     private OffsetDateTime orderDate;
-    @OneToOne(cascade = CascadeType.MERGE)
+    private String uuid;
+    private boolean isInvoiceAvailable;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
     private Product product;
     @ManyToOne
     private UserInfo user;

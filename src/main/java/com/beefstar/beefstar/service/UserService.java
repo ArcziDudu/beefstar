@@ -4,6 +4,8 @@ import com.beefstar.beefstar.dao.RoleDao;
 import com.beefstar.beefstar.dao.UserInfoDao;
 import com.beefstar.beefstar.domain.RoleDTO;
 import com.beefstar.beefstar.domain.UserInfoDTO;
+import com.beefstar.beefstar.domain.exception.UserNotFoundException;
+import com.beefstar.beefstar.domain.exception.UserWithThatUsernameExists;
 import com.beefstar.beefstar.infrastructure.entity.UserInfo;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -26,15 +29,21 @@ public class UserService {
 
     @Transactional
     public UserInfo registerNewUser(UserInfoDTO newUser) {
-        RoleDTO role = roleDao.findById("User").orElseThrow(() -> new UsernameNotFoundException("role not found"));
-        ;
-        return userInfoDao.save(UserInfoDTO.builder()
-                .userName(newUser.userName())
-                .userFirstName(newUser.userFirstName())
-                .userLastName(newUser.userLastName())
-                .role(Set.of(role))
-                .userPassword(passwordEncoder.encode(newUser.userPassword()))
-                .build());
+        Optional<UserInfo> byId = userInfoDao.findById(newUser.userName());
+        if(byId.isPresent()){
+            throw new UserWithThatUsernameExists(String.format("User with that username [%s] exists!", newUser.userName()));
+        }else {
+            RoleDTO role = roleDao.findById("User").orElseThrow(() -> new UsernameNotFoundException("role not found"));
+            ;
+            return userInfoDao.save(UserInfoDTO.builder()
+                    .userName(newUser.userName())
+                    .userFirstName(newUser.userFirstName())
+                    .userLastName(newUser.userLastName())
+                    .role(Set.of(role))
+                    .userPassword(passwordEncoder.encode(newUser.userPassword()))
+                    .build());
+        }
+
     }
 
     public void initRolesAndUser() {
@@ -73,8 +82,12 @@ public class UserService {
     public UserInfo findUserById(String userId) {
         Optional<UserInfo> byId = userInfoDao.findById(userId);
         if (byId.isEmpty()) {
-            throw new RuntimeException();
+            throw new UserNotFoundException(String.format("User with id [%s] not found", userId));
         }
         return byId.get();
+    }
+
+    public List<UserInfo> findAll() {
+        return userInfoDao.findAll();
     }
 }

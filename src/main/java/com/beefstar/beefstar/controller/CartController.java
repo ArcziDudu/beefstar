@@ -18,7 +18,7 @@ public class CartController {
     private static final String GET_CART_DETAILS = "/cartDetails";
     private static final String CART_DELETE = "/cartDelete/{cartItemId}";
 
-    @PreAuthorize("hasRole('User')")
+
     @PostMapping(ADD_TO_CART)
     public ResponseEntity<Cart> addToCart(@PathVariable(name = "productId") Integer productId) {
         return ResponseEntity.ok(cartService.addToCart(productId));
