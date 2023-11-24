@@ -157,7 +157,7 @@ class OrdersControllerTest extends RestAssuredIntegrationTestBase {
 
     @Test
     void thatReturnListOfOrdersForUser() {
-        JwtRequest jwtRequest = new JwtRequest("ArcziDudu", "admin@pass");
+        JwtRequest jwtRequest = new JwtRequest("testerowy", "test");
 
         String tokenUser = given()
                 .contentType(ContentType.JSON)
@@ -175,7 +175,7 @@ class OrdersControllerTest extends RestAssuredIntegrationTestBase {
 
         response.then()
                 .statusCode(HttpStatus.SC_OK)
-                .body("size()", equalTo(0));
+                .body("size()", equalTo(1));
 
         given()
                 .contentType(ContentType.JSON)
@@ -197,7 +197,7 @@ class OrdersControllerTest extends RestAssuredIntegrationTestBase {
 
         after.then()
                 .statusCode(HttpStatus.SC_OK)
-                .body("size()", equalTo(1));
+                .body("size()", equalTo(2));
 
     }
 

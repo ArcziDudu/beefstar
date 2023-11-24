@@ -58,7 +58,6 @@ public class UserService {
 
         roleDao.save(adminRole);
         roleDao.save(userRole);
-
         UserInfoDTO adminUser = UserInfoDTO.builder()
                 .userFirstName("Admin")
                 .userLastName("Admin")
@@ -66,17 +65,7 @@ public class UserService {
                 .userPassword(passwordEncoder.encode("admin@pass"))
                 .role(Set.of(adminRole))
                 .build();
-
-        UserInfoDTO user = UserInfoDTO.builder()
-                .userFirstName("Arczi")
-                .userLastName("Augustyn")
-                .userName("ArcziDudu")
-                .userPassword(passwordEncoder.encode("admin@pass"))
-                .role(Set.of(userRole))
-                .build();
-
         userInfoDao.save(adminUser);
-        userInfoDao.save(user);
     }
 
     public UserInfo findUserById(String userId) {
