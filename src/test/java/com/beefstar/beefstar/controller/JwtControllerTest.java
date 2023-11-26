@@ -25,7 +25,7 @@ class JwtControllerTest extends RestAssuredIntegrationTestBase {
 
     @Test
     public void thatShouldOkWhenExistingUser() throws Exception {
-        JwtRequest jwtRequest = new JwtRequest("artek", "test");
+        JwtRequest jwtRequest = new JwtRequest("testerowy", "test");
         given()
                 .contentType(ContentType.JSON)
                 .body(jwtRequest)

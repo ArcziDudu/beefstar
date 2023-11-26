@@ -2,8 +2,12 @@ package com.beefstar.beefstar.controller;
 
 import com.beefstar.beefstar.controller.config.RestAssuredIntegrationTestBase;
 import com.beefstar.beefstar.infrastructure.configuration.security.model.JwtRequest;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpStatus;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
@@ -16,6 +20,8 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
 class ProductControllerTest extends RestAssuredIntegrationTestBase {
+
+
 
 
     @Test

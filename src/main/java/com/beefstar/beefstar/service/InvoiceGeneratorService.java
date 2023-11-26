@@ -14,8 +14,10 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import reactor.util.retry.Retry;
 
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -39,22 +41,34 @@ public class InvoiceGeneratorService {
                 .build();
     }
 
-    public void generatePdf(String htmlContent, String uuid) {
+    public void generatePdfWithRetry(String htmlContent, String uuid) {
         String jsonBody = "{\"source\":{\"html\":\"" +
                 htmlContent
                 + "\"},\"pdf\":{\"format\":\"A4\",\"scale\":1,\"printBackground\":true},\"wait\":{\"for\":\"navigation\",\"waitUntil\":\"load\",\"timeout\":2500}}";
+
         webClient.post()
                 .body(BodyInserters.fromValue(jsonBody))
                 .retrieve()
                 .bodyToMono(byte[].class)
+                .retryWhen(Retry.backoff(3, Duration.ofSeconds(2))
+                        .maxBackoff(Duration.ofSeconds(10))
+                        .filter(this::isRetryableError))
                 .subscribe(
                         pdfBytes -> {
                             InvoiceEntity pdfDocument = new InvoiceEntity();
                             saveInvoice(uuid, pdfDocument, pdfBytes);
                         },
-                        error -> log.error("Error when fetching PDF: " + error.getMessage())
+                        error -> {
+                            log.error("Error during PDF file retrieval: " + error.getMessage());
+                        }
                 );
     }
+
+    private boolean isRetryableError(Throwable throwable) {
+        log.error("Error during retry attempt: " + throwable.getMessage());
+        return true;
+    }
+
     @Transactional
     public void saveInvoice(String uuid, InvoiceEntity pdfDocument, byte[] pdfBytes) {
         pdfDocument.setUuid(uuid);

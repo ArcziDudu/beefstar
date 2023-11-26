@@ -29,7 +29,7 @@ class UserControllerTest extends RestAssuredIntegrationTestBase {
     void registerNewUserWhenUsernameExists() {
         List<UserInfo> all = userService.findAll();
         assertEquals(4, all.size());
-        String body = "{\"userName\":\"artek\",\"userFirstName\":\"test\",\"userLastName\":\"test\",\"userPassword\":\"test\"}";
+        String body = "{\"userName\":\"testerUser\",\"userFirstName\":\"test\",\"userLastName\":\"test\",\"userPassword\":\"test\"}";
         given()
                 .contentType(ContentType.JSON)
                 .body(body)
