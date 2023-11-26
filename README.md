@@ -1,6 +1,9 @@
 # beefstar
 E-commerce app 
-[![BeefStar ecommerce](https://img.youtube.com/vi/F8M4EB00nqA/0.jpg)](https://www.youtube.com/watch?v=F8M4EB00nqA)
+<br>
+[Watch the video on YouTube](https://www.youtube.com/watch?v=F8M4EB00nqA)
+![Nazwa filmu](https://img.youtube.com/vi/F8M4EB00nqA/0.jpg)
+
 
 Application written in java using technologies such as Spring Boot, PostgreSql. The visual layer was written in Angular, The application is designed to run in Docker. 
 
