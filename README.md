@@ -1,5 +1,7 @@
 # beefstar
 E-commerce app 
+[![BeefStar ecommerce](https://img.youtube.com/vi/F8M4EB00nqA/0.jpg)](https://www.youtube.com/watch?v=F8M4EB00nqA)
+
 Application written in java using technologies such as Spring Boot, PostgreSql. The visual layer was written in Angular, The application is designed to run in Docker. 
 
 To run the application you need to have docker environment installed, for Windows, installation guide is available at the link https://docs.docker.com/desktop/install/windows-install/ 
