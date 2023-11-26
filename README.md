@@ -6,8 +6,11 @@ To run the application you need to have docker environment installed, for Window
 
 next steps: 
 download the repository: git clone <link>.
+<b>
 build jar: ./gradlew build
+<b>
 build image: docker build -t beefstar .
+<b>
 running the container: docker compose up -d
 
 the application will be available at link localhost:4200
